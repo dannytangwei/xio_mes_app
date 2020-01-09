@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { ApiservBaseurl } from '../../app.json';
+import { LogInfo, LogException, LogError } from './Logger';
 
 //封装的请求  带超时
 const _timeout = 20 * 1000  //默认10秒
@@ -58,6 +59,8 @@ function HTTPPOST(url, body, token = _token, version = _version, timeout = _time
     }, timeout);
 
     let newbody = (typeof (body) == 'string' ? body : JSON.stringify(body));
+
+    LogInfo('POST请求服务端数据' + baseurl + url);
     let postPromise = new Promise((resolve, reject) => {
         fetch(baseurl + url, {
             method: 'POST',

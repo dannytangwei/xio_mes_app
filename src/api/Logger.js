@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Logger } from '../../app.json';
 
-import StringUtil from '../api/StringUtil';
+import StringUtil from './StringUtil';
 
 var RNFS = require('react-native-fs');
 

@@ -16,10 +16,10 @@ export const login = (user) => {
                 if (res.code == 0) {
                     dispatch(loginSuccess(true, res.data, res.token)); // 登录请求完成
                 } else {
-                    dispatch(loginError(res.msg)); // 登录请求完成
+                    dispatch(loginError('错误' + res.msg)); // 登录请求完成
                 }
             }).catch((error) => {
-                dispatch(loginError(error)); // 登录请求出错
+                dispatch(loginError('异常：' + error)); // 登录请求出错
             })
     }
 }
