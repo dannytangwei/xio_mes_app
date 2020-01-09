@@ -15,6 +15,7 @@ var path2 = appdir + '/' + Logger.LogFilename_Exceprion;
 
 var path3 = appdir + '/' + Logger.LogFilename_Error;
 
+
 RNFS.mkdir(appdir);
 
 function createlogfile(logfilepath) {
@@ -64,7 +65,7 @@ function getmyDate() {
 
 
 function LogInfo(title, message) {
-
+    console.info(path);
     let content = '[' + getmyDate() + '] ' + title + '==>' + message + '。\r\n';
     RNFS.appendFile(path, content, 'utf8')
         .then((success) => {

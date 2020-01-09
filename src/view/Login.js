@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, ScrollView, Text, View, Image, Alert, YellowBox, TouchableOpacity, Dimensions, Platform } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Image, Alert, YellowBox, TouchableOpacity, Dimensions, Platform, PermissionsAndroid } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { WhiteSpace, WingBlank, Flex } from '@ant-design/react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,6 +8,7 @@ import { WhiteSpace, WingBlank, Flex } from '@ant-design/react-native';
 import { connect } from 'react-redux';
 import * as loginAction from '../store/actions/Login'
 import { loginUser, AppVersion } from '../../app.json';
+
 // import NfcManager, { Ndef } from 'react-native-nfc-manager';
 // import ErrorUtils from "ErrorUtils";
 
@@ -80,6 +81,7 @@ class Login extends React.Component {
         //             this._startNfc();
         //         }
         //     })
+        this.requestWRITESTORAGEPermission();
     }
 
     _startNfc() {
@@ -150,6 +152,36 @@ class Login extends React.Component {
     componentWillUnmount() {
         if (this._stateChangedSubscription) {
             this._stateChangedSubscription.remove();
+        }
+    }
+
+    async requestWRITESTORAGEPermission() {
+        try {
+            const granted = await PermissionsAndroid.requestMultiple(
+                [
+                    PermissionsAndroid.PERMISSIONS.CAMERA,
+                    PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                    PermissionsAndroid.PERMISSIONS.RECORD_AUDIO
+                ]
+                // {
+                //     title: '申请写文件的权限',
+                //     message:
+                //         '西奥MES应用程序想操作您手机上的文件，' +
+                //         '便于存储应用程序日志和文件。',
+                //     buttonNeutral: '等会再问我',
+                //     buttonNegative: '不行',
+                //     buttonPositive: '好吧',
+                // },
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log('现在你获得写文件权限了');
+            } else {
+                console.log('用户并不屌你');
+            }
+        } catch (err) {
+            console.warn(err);
         }
     }
 
