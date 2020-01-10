@@ -16,6 +16,7 @@ import FQCLianDongHandleScreen from '../viewbiz/qc/FQCLianDongHandle';
 import IQCCheckPage from '../viewbiz/qc/IQCUnqualified';
 
 import SyncMangerScreen from '../viewbiz/manage/SyncManger';
+import JPushMessageTestScreen from '../viewbiz/test/JPushMessageTest';
 
 const router = {
     //登陆页面
@@ -90,6 +91,10 @@ const router = {
     SyncManager: {
         path: '/SyncManager',
         screen: SyncMangerScreen,
+    },
+    JPushMessageTest: {
+        path: '/JPushMessageTest',
+        screen: JPushMessageTestScreen,
     }
 }
 

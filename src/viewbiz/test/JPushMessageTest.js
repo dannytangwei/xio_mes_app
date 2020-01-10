@@ -1,6 +1,25 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Button, Platform } from 'react-native'
-import JPushModule from 'jpush-react-native'
+import { StyleSheet, Text, View, TouchableHighlight, ScrollView } from 'react-native';
+import JPush from 'jpush-react-native';
+import { Header } from 'react-native-elements';
+
+class Button extends React.Component {
+    render() {
+        return <TouchableHighlight
+            onPress={this.props.onPress}
+            underlayColor='#e4083f'
+            activeOpacity={0.5}
+        >
+            <View
+                style={styles.setBtnStyle}>
+                <Text
+                    style={styles.textStyle}>
+                    {this.props.title}
+                </Text>
+            </View>
+        </TouchableHighlight>
+    }
+}
 
 export default class ChatWith extends Component {
     constructor(props) {
@@ -8,76 +27,125 @@ export default class ChatWith extends Component {
     }
 
     componentDidMount() {
-        //极光推送
-        JPushModule.initPush();// 初始化 JPush
-        // 新版本必需写回调函数
-        // JPushModule.notifyJSDidLoad();
-        JPushModule.notifyJSDidLoad((resultCode) => {
-            if (resultCode === 0) {
-                console.log(resultCode);
-            }
-        });
-
-
-        // 接收自定义消息
-        JPushModule.addReceiveCustomMsgListener((message) => {
-            console.log("接收自定义消息: " + message);
-            //this.setState({ pushMsg: message });
-        });
-        // 接收推送通知
-        JPushModule.addReceiveNotificationListener((message) => {
-            console.log("接收推送通知: " + message);
-        });
-        // 打开通知
-        JPushModule.addReceiveOpenNotificationListener((map) => {
-            console.log("Opening notification!");
-            console.log("map.extra: " + map.extras);
-            // 可执行跳转操作，也可跳转原生页面
-            // this.props.navigation.navigate("SecondActivity");
-        });
+        JPush.init();
+        //连接状态
+        this.connectListener = result => {
+            console.log("connectListener:" + JSON.stringify(result))
+        };
+        JPush.addConnectEventListener(this.connectListener);
+        //通知回调
+        this.notificationListener = result => {
+            console.log("notificationListener:" + JSON.stringify(result))
+        };
+        JPush.addNotificationListener(this.notificationListener);
+        //本地通知回调
+        this.localNotificationListener = result => {
+            console.log("localNotificationListener:" + JSON.stringify(result))
+        };
+        JPush.addLocalNotificationListener(this.localNotificationListener);
+        //自定义消息回调
+        this.customMessageListener = result => {
+            console.log("customMessageListener:" + JSON.stringify(result))
+        };
+        JPush.addCustomMessagegListener(this.customMessageListener);
+        //tag alias事件回调
+        this.tagAliasListener = result => {
+            console.log("tagAliasListener:" + JSON.stringify(result))
+        };
+        JPush.addTagAliasListener(this.tagAliasListener);
+        //手机号码事件回调
+        this.mobileNumberListener = result => {
+            console.log("mobileNumberListener:" + JSON.stringify(result))
+        };
+        JPush.addMobileNumberListener(this.mobileNumberListener);
     }
-
-    componentWillUnmount() {
-        // JPushModule.removeReceiveCustomMsgListener();
-        // JPushModule.removeReceiveNotificationListener();
+    gohome() {
+        const { navigate } = this.props.navigation;
+        navigate('Index');
     }
-
     render() {
-        return (
-            <View style={styles.containers}>
-                <Button
-                    title="点击推送"
-                    onPress={() => {
-                        // 推送事件 业务代码 请提取到函数里面    
-                        JPushModule.sendLocalNotification({
-                            buildId: 1, // 设置通知样式
-                            id: 5, // 通知的 id, 可用于取消通知
-                            extra: { key1: 'value1', key2: 'value2' }, // extra 字段 就是我们需要传递的参数
-                            fireTime: new Date().getTime(), // 通知触发时间的时间戳（毫秒）
-                            badge: 8, // 本地推送触发后应用角标的 badge 值 （iOS Only）
-                            subtitle: 'subtitle',  // 子标题 （iOS10+ Only）
-                            title: '通知',
-                            content: '您有未读消息',
-                        })
-                    }}
-                />
+        return (<ScrollView>
+            <Header
+                placement="left"
+                leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
+                centerComponent={{ text: '消息推送功能测试', style: { color: '#fff', fontWeight: 'bold' } }}
+                containerStyle={styles.headercontainer}
+            />
+            <View style={styles.container}>
+                <Button title="setLoggerEnable"
+                    onPress={() => JPush.setLoggerEnable(true)
+                    } />
 
-                <Text>
-                </Text>
-                <Button
-                    title="点击测试全局异常信息获取"
-                    onPress={() => {
-                        // 推送事件 业务代码 请提取到函数里面    
-                        this.texterror()
-                    }}
-                />
+                <Button title="getRegisterID"
+                    onPress={() => JPush.getRegistrationID(result =>
+                        console.log("registerID:" + JSON.stringify(result))
+                    )} />
+
+                <Button title="addTags"
+                    onPress={() => JPush.addTags({ sequence: 1, tags: ["1", "2", "3"] })} />
+                <Button title="updateTags"
+                    onPress={() => JPush.updateTags({ sequence: 2, tags: ["4", "5", "6"] })} />
+                <Button title="deleteTag"
+                    onPress={() => JPush.deleteTag({ sequence: 3, tags: ["4", "5", "6"] })} />
+                <Button title="deleteTags"
+                    onPress={() => JPush.deleteTags({ sequence: 4 })} />
+                <Button title="queryTag"
+                    onPress={() => JPush.queryTag({ sequence: 4, tag: "1" })} />
+                <Button title="queryTags"
+                    onPress={() => JPush.queryTags({ sequence: 5 })} />
+                <Button title="setAlias"
+                    onPress={() => JPush.setAlias({ sequence: 6, alias: "xxx" })} />
+                <Button title="deleteAlias"
+                    onPress={() => JPush.deleteAlias({ sequence: 7 })} />
+                <Button title="queryAlias"
+                    onPress={() => JPush.queryAlias({ sequence: 8 })} />
+                <Button title="setMobileNumber"
+                    onPress={() => JPush.setMobileNumber({ mobileNumber: "18058125312" })} />
+
+                <Button title="initCrashHandler"
+                    onPress={() => JPush.initCrashHandler()} />
+                <Button title="addLocalNotification"
+                    onPress={() => JPush.addLocalNotification({
+                        messageID: "123456789",
+                        title: "title123",
+                        content: "content123",
+                        extras: { "key123": "value123" }
+                    })} />
+                <Button title="removeLocalNotification"
+                    onPress={() => JPush.removeLocalNotification({ messageID: '123456789' })} />
+
             </View>
-        )
+        </ScrollView>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-    containers: {
-        paddingTop: 20
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    setBtnStyle: {
+        width: 320,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        borderWidth: 1,
+        borderColor: '#3e83d7',
+        borderRadius: 8,
+        backgroundColor: '#3e83d7',
+        padding: 2
+    },
+    textStyle: {
+        textAlign: 'center',
+        fontSize: 20,
+        color: '#ffffff'
+    },
+    headercontainer: {
+        marginTop: 0,
+        paddingTop: 0,
+        height: 50,
     }
-})
+});
