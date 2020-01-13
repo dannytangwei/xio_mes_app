@@ -200,7 +200,7 @@ class Login extends React.Component {
             submitLoading = true;
         }
         let { tag } = this.state;
-        console.log('加载登陆界面');
+
         return (
             <ScrollView>
                 <WingBlank>

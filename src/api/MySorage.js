@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Storage from 'react-native-storage';
 
-import {
-    AppRegistry,
-    View, AsyncStorage
-} from 'react-native';
+import { AppRegistry, View } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import SYNC from './sync';
 

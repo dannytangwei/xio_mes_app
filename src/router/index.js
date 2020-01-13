@@ -17,6 +17,7 @@ import IQCCheckPage from '../viewbiz/qc/IQCUnqualified';
 
 import SyncMangerScreen from '../viewbiz/manage/SyncManger';
 import JPushMessageTestScreen from '../viewbiz/test/JPushMessageTest';
+// import BackgroudTaskTestScreen from '../viewbiz/test/backtest';
 
 const router = {
     //登陆页面
@@ -95,7 +96,11 @@ const router = {
     JPushMessageTest: {
         path: '/JPushMessageTest',
         screen: JPushMessageTestScreen,
-    }
+    },
+    // BackgroudTask_TEST: {
+    //     path: '/BackgroudTask_TEST',
+    //     screen: BackgroudTaskTestScreen,
+    // }
 }
 
 export default router

@@ -1,6 +1,5 @@
-import React, {
-    AsyncStorage
-} from 'react-native';
+import React from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class DeviceStorage {
     /**

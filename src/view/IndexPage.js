@@ -194,13 +194,13 @@ class IndexPage extends React.Component {
                     }
                 );
 
-                this.state.appBtnTest.push(
-                    {
-                        name: '音频操作测试',
-                        iconname: 'dash',
-                        pagepath: 'AudioTest'
-                    }
-                );
+                // this.state.appBtnTest.push(
+                //     {
+                //         name: '音频操作测试',
+                //         iconname: 'dash',
+                //         pagepath: 'AudioTest'
+                //     }
+                // );
 
                 this.state.appBtnTest.push(
                     {
@@ -218,13 +218,13 @@ class IndexPage extends React.Component {
                     }
                 );
 
-                this.state.appBtnTest.push(
-                    {
-                        name: '后台作业 测试',
-                        iconname: 'dash',
-                        pagepath: 'Back_TEST'
-                    }
-                );
+                // this.state.appBtnTest.push(
+                //     {
+                //         name: '后台作业 测试',
+                //         iconname: 'dash',
+                //         pagepath: 'BackgroudTask_TEST'
+                //     }
+                // );
             }
 
         }
@@ -378,7 +378,6 @@ class IndexPage extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         let { status, user } = this.props;
-        console.log('加载首页界面');
         //Alert.alert(user.barRoleText);
         return (
             <Provider>

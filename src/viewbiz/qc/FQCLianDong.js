@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 import { LogInfo, LogError, LogException } from '../../api/Logger';
 import { ProcessingManager } from 'react-native-video-processing';
-import BackgroundJob from "react-native-background-job";
+// import BackgroundJob from "react-native-background-job";
 // import ErrorUtils from "ErrorUtils";
 
 // ErrorUtils.setGlobalHandler((e) => {
@@ -434,6 +434,7 @@ class FQCLianDong extends React.Component {
         });
     }
 
+    //开始压缩文件，准备上传视频
     uploadvideo(orderno, videopath) {
         let { status, user, token } = this.props;
 
@@ -453,28 +454,32 @@ class FQCLianDong extends React.Component {
                 .then((data) => {
 
                     LogInfo('上传成品检验（联动）视频压缩完成，', '压缩完成...');
+                    //BackgroundJob.setGlobalWarnings(true);
                     //console.log('压缩成功!' + data);
-                    BackgroundJob.register({
-                        jobKey: JobKeyStr,
-                        job: () => {
-                            this.uploadvideoBackTask(formdata, JobKeyStr, data.source);
-                        }
-                    });
+                    this.uploadvideoBackTask(formdata, JobKeyStr, data.source);
+                    // BackgroundJob.register({
+                    //     jobKey: JobKeyStr,
+                    //     job: () => {
 
-                    BackgroundJob.schedule({
-                        jobKey: JobKeyStr,
-                        notificationTitle: "Notification title",
-                        notificationText: "Notification text",
-                        allowWhileIdle: true,
-                        allowExecutionInForeground: true,
-                        period: 1000
-                    });
+                    //     }
+                    // });
 
-                    let newvideouploaded = this.state.videouploaded + 1;
-                    this.setState({ videouploaded: newvideouploaded });
-                    this.setState({ videoloading: false });
+                    // BackgroundJob.schedule({
+                    //     jobKey: JobKeyStr,
+                    //     period: 1000,
+                    //     exact: true,
+                    //     allowExecutionInForeground: true
+                    // });
+                    // BackgroundJob.schedule({
+                    //     jobKey: JobKeyStr,
+                    //     notificationTitle: "Notification title",
+                    //     notificationText: "Notification text",
+                    //     allowWhileIdle: true,
+                    //     allowExecutionInForeground: true,
+                    //     period: 1000
+                    // });
 
-                    Toast.info('上传视频【' + videopath + '】成功！', 1, undefined, false);
+
 
                 }).catch((err) => {
                     //Alert.alert('压缩视频文件异常！', '异常原因：' + err);
@@ -502,40 +507,45 @@ class FQCLianDong extends React.Component {
     }
 
     uploadvideoBackTask(formdata, JobKey, videopath) {
+        console.log('上传成品检验（联动）视频任务，开始');
         let { status, user, token } = this.props;
-        if (task_oqc_videouploading == false) {
-            LogInfo('上传成品检验（联动）视频开始上传，', '开始上传文件...');
-            task_oqc_videouploading = true;
+        // if (task_oqc_videouploading == false) {
+        LogInfo('上传成品检验（联动）视频开始上传，', '开始上传文件...');
+        // task_oqc_videouploading = true;
 
-            let videofile = { uri: videopath, type: 'application/octet-stream', name: 'fqcvideo_' + '.3gp' };
-            formdata.append('file', videofile);
-
-
-            HTTPPOST_Multipart('/sm/uploadLDSMVideoParam', formdata, token, '1', 1200 * 1000)
-                .then((res) => {
-                    if (res.code > 0) {
-                        //this.setState({ videouploaded: res.data });
-
-                        LogInfo('上传成品检验（联动）视频成功，', '返回值：' + res.code);
+        let videofile = { uri: videopath, type: 'application/octet-stream', name: 'fqcvideo_' + '.3gp' };
+        formdata.append('file', videofile);
 
 
-                    } else {
-                        LogError('上传成品检验（联动）视频错误，', '错误：' + res.code + ':' + res.msg);
-                        //Alert.alert('错误', '上传视频【' + videopath + '】失败！' + res.code + ':' + res.msg);
+        HTTPPOST_Multipart('/sm/uploadLDSMVideoParam', formdata, token, '1', 1200 * 1000)
+            .then((res) => {
+                if (res.code > 0) {
+                    //this.setState({ videouploaded: res.data });
+                    // let newvideouploaded = this.state.videouploaded + 1;
+                    this.setState({ videouploaded: res.data });
+                    this.setState({ videoloading: false });
 
-                    }
-                    BackgroundJob.cancel({ jobKey: JobKey });
-                    task_oqc_videouploading = false;
-                    //this.setState({ videoloading: false });
-                }).catch((err) => {
-                    LogException('上传成品检验（联动）视频异常，', '上传视频【' + JSON.stringify(formdata) + '异常信息：' + err);
-                    //Alert.alert('上传联动视频异常', '上传视频【' + videopath + '】异常！' + err);
-                    //this.setState({ videoloading: false });
-                    BackgroundJob.cancel({ jobKey: JobKey });
-                    task_oqc_videouploading = false;
-                })
-        }
+                    Toast.info('上传视频【' + videopath + '】成功！', 1, undefined, false);
+                    LogInfo('上传成品检验（联动）视频成功，', '返回值：' + res.code);
 
+
+                } else {
+                    LogError('上传成品检验（联动）视频错误，', '错误：' + res.code + ':' + res.msg);
+                    //Alert.alert('错误', '上传视频【' + videopath + '】失败！' + res.code + ':' + res.msg);
+                    this.setState({ videoloading: false });
+                }
+                // BackgroundJob.cancel({ jobKey: JobKey });
+                // task_oqc_videouploading = false;
+                //this.setState({ videoloading: false });
+            }).catch((err) => {
+                LogException('上传成品检验（联动）视频异常，', '上传视频【' + JSON.stringify(formdata) + '异常信息：' + err);
+                this.setState({ videoloading: false });
+                //Alert.alert('上传联动视频异常', '上传视频【' + videopath + '】异常！' + err);
+                //this.setState({ videoloading: false });
+                // BackgroundJob.cancel({ jobKey: JobKey });
+                // task_oqc_videouploading = false;
+            })
+        // }
     }
     onChangeQChandle(value) {
         this.setState({ QChandle: value });
