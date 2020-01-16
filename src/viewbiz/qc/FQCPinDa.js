@@ -379,6 +379,7 @@ class FQCPinDa extends React.Component {
             <Provider>
                 <ScrollView >
                     <Header
+                        ViewComponent={View }
                         placement="left"
                         leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                         centerComponent={{ text: '成品拼搭检验', style: { color: '#fff', fontWeight: 'bold' } }}

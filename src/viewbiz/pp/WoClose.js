@@ -682,6 +682,7 @@ class WoClose extends React.Component {
         return (
             <ScrollView>
                 <Header
+                    ViewComponent={View }
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '工单完工扫描', style: { color: '#fff', fontWeight: 'bold' } }}

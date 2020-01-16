@@ -307,6 +307,7 @@ class PoinByLine extends React.Component {
             <Provider>
                 <ScrollView>
                     <Header
+                        ViewComponent={View }
                         placement="left"
                         leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                         centerComponent={{ text: '采购单入库(按订单行)', style: { color: '#fff', fontWeight: 'bold' } }}

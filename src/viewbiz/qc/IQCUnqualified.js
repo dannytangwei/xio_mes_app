@@ -433,6 +433,7 @@ class IQCUnqualified extends React.Component {
             <Provider>
                 <ScrollView>
                     <Header
+                        ViewComponent={View }
                         placement="left"
                         leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                         centerComponent={{ text: '进货质检', style: { color: '#fff', fontWeight: 'bold' } }}

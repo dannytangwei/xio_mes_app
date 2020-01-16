@@ -257,6 +257,7 @@ class FQCPinDaHandle extends React.Component {
             <Provider>
                 <ScrollView >
                     <Header
+                        ViewComponent={View }
                         placement="left"
                         leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                         centerComponent={{ text: '成品检验不合格处理', style: { color: '#fff', fontWeight: 'bold' } }}

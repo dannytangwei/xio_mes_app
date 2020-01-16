@@ -131,6 +131,7 @@ class ScanPoInWarehouse extends React.Component {
             <ScrollView>
                 <Provider>
                     <Header
+                        ViewComponent={View }
                         placement="left"
                         leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                         centerComponent={{ text: '采购单入库扫描', style: { color: '#fff', fontWeight: 'bold' } }}
