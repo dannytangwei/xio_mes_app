@@ -66,6 +66,7 @@ export default class ChatWith extends Component {
     render() {
         return (<ScrollView>
             <Header
+                ViewComponent={View }
                 placement="left"
                 leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                 centerComponent={{ text: '消息推送功能测试', style: { color: '#fff', fontWeight: 'bold' } }}

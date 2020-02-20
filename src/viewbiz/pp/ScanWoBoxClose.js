@@ -632,6 +632,7 @@ class ScanWoBoxClose extends React.Component {
         return (
             <ScrollView>
                 <Header
+                    ViewComponent={View }
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '装箱完工扫描', style: { color: '#fff', fontWeight: 'bold' } }}

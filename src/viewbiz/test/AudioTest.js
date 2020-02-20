@@ -148,6 +148,7 @@ export default class AudioTest extends Component {
         return (
             <ScrollView>
                 <Header
+                    ViewComponent={View }
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '音频功能测试', style: { color: '#fff', fontWeight: 'bold' } }}

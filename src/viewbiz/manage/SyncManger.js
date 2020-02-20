@@ -362,6 +362,7 @@ class SyncManger extends React.Component {
         return (
             <ScrollView>
                 <Header
+                    ViewComponent={View }
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '同步数据查询', style: { color: '#fff', fontWeight: 'bold' } }}

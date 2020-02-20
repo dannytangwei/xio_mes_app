@@ -110,6 +110,7 @@ class ScanBoxInStorage extends React.Component {
         return (
             <ScrollView >
                 <Header
+                    ViewComponent={View }
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '成品入库扫描', style: { color: '#fff', fontWeight: 'bold' } }}

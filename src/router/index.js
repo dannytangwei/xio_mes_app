@@ -17,7 +17,7 @@ import IQCCheckPage from '../viewbiz/qc/IQCUnqualified';
 
 import SyncMangerScreen from '../viewbiz/manage/SyncManger';
 import JPushMessageTestScreen from '../viewbiz/test/JPushMessageTest';
-// import BackgroudTaskTestScreen from '../viewbiz/test/backtest';
+import BackgroudTaskTestScreen from '../viewbiz/test/backtest';
 
 const router = {
     //登陆页面
