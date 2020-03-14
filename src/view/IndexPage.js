@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { ScrollView, Text, TouchableWithoutFeedback, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { WhiteSpace, WingBlank, Flex, Carousel, TabBar, Icon, SearchBar, Card, Provider } from '@ant-design/react-native';
 
-import { PricingCard } from 'react-native-elements';
 import { HTTPPOST, HTTPGET } from '../api/HttpRequest';
 import { connect } from 'react-redux';
 // import ErrorUtils from "ErrorUtils";
