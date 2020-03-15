@@ -11,7 +11,10 @@ import { connect } from 'react-redux';
 
 import { LogInfo, LogError, LogException } from '../../api/Logger';
 
-//import { ProcessingManager} from 'react-native-video-processing';
+if(Platform.OS!='ios'){
+    import { ProcessingManager} from 'react-native-video-processing';
+}
+//
 
 // import BackgroundJob from "react-native-background-job";
 // import ErrorUtils from "ErrorUtils";
@@ -457,7 +460,6 @@ class FQCLianDong extends React.Component {
                 LogInfo('上传成品检验（联动）视频开始压缩，', '开始压缩...' + retobj.originalFilepath);
                 ProcessingManager.compress(retobj.originalFilepath, compressOptions)
                     .then((data) => {
-    
                         LogInfo('上传成品检验（联动）视频压缩完成，', '压缩完成...');
                         //BackgroundJob.setGlobalWarnings(true);
                         //console.log('压缩成功!' + data);
