@@ -1,0 +1,20 @@
+{
+  "name": "xio_mes_app",
+  "displayName": "xio_mes_app",
+  "loginUser": {
+    "username": "",
+    "password": ""
+  },
+  "ApiservBaseurl": "http://mesapi.xiolift.com:10080/AppSMAPI",
+  "AppVersion": "1.0.12",
+  "Logger": {
+    "Log_Dir": "xioliftmes",
+    "LogFilename_Info": "loginfo.txt",
+    "LogFilename_Error": "logerror.txt",
+    "LogFilename_Exceprion": "logexception.txt"
+  },
+  "CodePush": {
+    "Server": "http: //10.19.0.58:3000/",
+    "DeploymentKey": "DCxEtcRnNJgGITAjeu4a9r0Bhw1o4ksvOXqog"
+  }
+}
