@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { ScrollView, Text, TouchableWithoutFeedback, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { WhiteSpace, WingBlank, Flex, Carousel, TabBar, Icon, SearchBar, Card, Provider } from '@ant-design/react-native';
 
+
+
 import { HTTPPOST, HTTPGET } from '../api/HttpRequest';
 import { connect } from 'react-redux';
 // import ErrorUtils from "ErrorUtils";
@@ -279,19 +281,19 @@ class IndexPage extends React.Component {
                     </Carousel>
                     <Flex justify="between" style={styles.showboxarea}>
                         <View style={styles.showbox} >
-                            <Text style={styles.showbox_title}>  技术释放 </Text>
+                            <Text style={styles.showbox_title}>  待处理 </Text>
                             <Text style={styles.showbox_value}> 000 </Text>
                         </View>
                         <View style={styles.showbox} >
-                            <Text style={styles.showbox_title}>  合同排产 </Text>
+                            <Text style={styles.showbox_title}>  已处理 </Text>
                             <Text style={styles.showbox_value}> 000 </Text>
                         </View>
                         <View style={styles.showbox} >
-                            <Text style={styles.showbox_title}>  完工入库 </Text>
+                            <Text style={styles.showbox_title}>  我发起 </Text>
                             <Text style={styles.showbox_value}> 000 </Text>
                         </View>
                         <View style={styles.showbox} >
-                            <Text style={styles.showbox_title}>  发货 </Text>
+                            <Text style={styles.showbox_title}>  已完结 </Text>
                             <Text style={styles.showbox_value}> 000 </Text>
                         </View>
                     </Flex>

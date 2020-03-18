@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform,Text, View, ScrollView, TouchableOpacity, Alert, StyleSheet, Dimensions, InteractionManager, TouchableHighlight, NativeModules } from 'react-native';
+import { Platform, Text, View, ScrollView, TouchableOpacity, Alert, StyleSheet, Dimensions, InteractionManager, TouchableHighlight, NativeModules } from 'react-native';
 import { Input, Button, Header, CheckBox } from 'react-native-elements';
 import { WhiteSpace, WingBlank, Flex, List, Switch, InputItem, Picker, Provider, Toast } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -11,9 +11,9 @@ import { connect } from 'react-redux';
 
 import { LogInfo, LogError, LogException } from '../../api/Logger';
 
-if(Platform.OS!='ios'){
-    import { ProcessingManager} from 'react-native-video-processing';
-}
+//这个组件暂时只支持Android
+import { ProcessingManager } from 'react-native-video-processing';
+
 //
 
 // import BackgroundJob from "react-native-background-job";
@@ -454,9 +454,9 @@ class FQCLianDong extends React.Component {
 
         RNFS.stat(videopath).then((retobj) => {
             // console.log('文件路径：' + retobj.originalFilepath);
-            if(Platform.OS==='ios'){
+            if (Platform.OS === 'ios') {
                 this.uploadvideoBackTask(formdata, JobKeyStr, retobj.originalFilepath);
-            }else{
+            } else {
                 LogInfo('上传成品检验（联动）视频开始压缩，', '开始压缩...' + retobj.originalFilepath);
                 ProcessingManager.compress(retobj.originalFilepath, compressOptions)
                     .then((data) => {
@@ -467,10 +467,9 @@ class FQCLianDong extends React.Component {
                         // BackgroundJob.register({
                         //     jobKey: JobKeyStr,
                         //     job: () => {
-    
                         //     }
                         // });
-    
+
                         // BackgroundJob.schedule({
                         //     jobKey: JobKeyStr,
                         //     period: 1000,
@@ -485,9 +484,9 @@ class FQCLianDong extends React.Component {
                         //     allowExecutionInForeground: true,
                         //     period: 1000
                         // });
-    
-    
-    
+
+
+
                     }).catch((err) => {
                         //Alert.alert('压缩视频文件异常！', '异常原因：' + err);
                         LogError('压缩视频文件异常！', '异常原因：' + err);
@@ -497,7 +496,7 @@ class FQCLianDong extends React.Component {
                     });
                 // console.log('视频压缩完成！');
             }
-           
+
         }).catch((err2) => {
             //Alert.alert('获取视频文件信息异常！', '异常原因：' + err2);
             LogException('获取视频文件信息异常！', '异常原因：' + err2);
@@ -564,7 +563,7 @@ class FQCLianDong extends React.Component {
             <Provider>
                 <ScrollView >
                     <Header
-                        ViewComponent={View }
+                        ViewComponent={View}
                         placement="left"
                         leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                         centerComponent={{ text: '成品联动检验', style: { color: '#fff', fontWeight: 'bold' } }}

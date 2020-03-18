@@ -137,6 +137,7 @@ android {
                 JPUSH_APPKEY: "e80f983ad2b737bd612dc985",
                 JPUSH_CHANNEL : "default"
         ]
+        multiDexEnabled true
     }
     splits {
         abi {

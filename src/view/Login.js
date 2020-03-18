@@ -81,7 +81,13 @@ class Login extends React.Component {
         //             this._startNfc();
         //         }
         //     })
-        this.requestWRITESTORAGEPermission();
+        if (Platform.OS === 'android') {
+            this.requestWRITESTORAGEPermission();
+        } else {
+            //ios 版本权限申请
+
+        }
+
     }
 
     _startNfc() {
@@ -155,6 +161,7 @@ class Login extends React.Component {
         }
     }
 
+    //申请权限
     async requestWRITESTORAGEPermission() {
         try {
             const granted = await PermissionsAndroid.requestMultiple(
