@@ -14,6 +14,7 @@
     "@ant-design/react-native": "^3.3.0",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/masked-view": "^0.1.7",
+    "@react-native-community/viewpager": "2.0.2",
     "jcore-react-native": "^1.7.5",
     "jpush-react-native": "^2.7.5",
     "react": "16.9.0",

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
 import { ScrollView, Text, TouchableWithoutFeedback, View, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
-import { WhiteSpace, WingBlank, Flex, Carousel, TabBar, Icon, SearchBar, Card, Provider } from '@ant-design/react-native';
-
+import { WhiteSpace, Tabs, NoticeBar, WingBlank, Flex, Carousel, TabBar, Icon, SearchBar, Card, Provider } from '@ant-design/react-native';
 
 
 import { HTTPPOST, HTTPGET } from '../api/HttpRequest';
 import { connect } from 'react-redux';
+
+import FocusTabs from './home/FocusTabs';
+import LinkSystem from './home/LinkSystem';
+
 // import ErrorUtils from "ErrorUtils";
 const AD_IMAGE1 = require('../assets/ad/ad1.png');
 const AD_IMAGE2 = require('../assets/ad/ad2.png');
@@ -15,6 +18,28 @@ const AD_IMAGE4 = require('../assets/ad/ad4.jpg');
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+
+
+
+const renderTabContent = (tab, index) => {
+    const style = {
+        paddingVertical: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+        backgroundColor: '#ddd',
+    };
+    const content = [1, 2, 3, 4, 5, 6, 7, 8].map(i => {
+        return (
+            <View key={`${index}_${i}`} style={style}>
+                <Text>
+                    {tab.title} - {i}
+                </Text>
+            </View>
+        );
+    });
+    return <ScrollView style={{ backgroundColor: '#fff' }}>{content}</ScrollView>;
+};
 // ErrorUtils.setGlobalHandler((e) => {
 
 //     //发生异常的处理方法,当然如果是打包好的话可能你找都找不到是哪段代码出问题了
@@ -43,6 +68,8 @@ class IndexPage extends React.Component {
             appBtnTest: [],
             //默认打开的结点
             activeSections: [0, 1, 2, 3],
+            //333=====================>>>>>>>>>>>>>>>>>>>>>>下面是首页Tab属性
+            TabSelected: 0,
         }
     }
 
@@ -240,6 +267,28 @@ class IndexPage extends React.Component {
 
     //显示首页内容
     renderContentIndex() {
+        const tabs = [
+            { title: 'First Tab' },
+            { title: 'Second Tab' },
+            { title: 'Third Tab' },
+        ];
+        const tabs2 = [
+            { title: '1st Tab' },
+            { title: '2nd Tab' },
+            { title: '3rd Tab' },
+            { title: '4th Tab' },
+            { title: '5th Tab' },
+            { title: '6th Tab' },
+            { title: '7th Tab' },
+            { title: '8th Tab' },
+            { title: '9th Tab' },
+        ];
+        const style = {
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 150,
+            backgroundColor: '#fff',
+        };
         return (
             <ScrollView >
                 <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -248,7 +297,7 @@ class IndexPage extends React.Component {
                         selectedIndex={2}
                         autoplay
                         infinite
-                        vertical
+                         
                     >
                         <View
                             style={[styles.containerVertical, {}]}
@@ -279,6 +328,7 @@ class IndexPage extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </Carousel>
+                    <WhiteSpace size="xs" />
                     <Flex justify="between" style={styles.showboxarea}>
                         <View style={styles.showbox} >
                             <Text style={styles.showbox_title}>  待处理 </Text>
@@ -297,9 +347,23 @@ class IndexPage extends React.Component {
                             <Text style={styles.showbox_value}> 000 </Text>
                         </View>
                     </Flex>
-                    <Text>建设中</Text>
+                    <WhiteSpace size="xs" />
+                    <NoticeBar
+                        mode="link"
+                        marqueeProps={{ loop: true, style: { fontSize: 18, color: '#000', } }}
+                        onPress={() => alert('link')}
+                        style={styles.noticebar}
+                    >
+                        公告: 西奥智造APP全面上线，希望大家多支持，多建议.
+                        </NoticeBar>
+
+                    <LinkSystem token={this.props.token} />
+
+                    <FocusTabs token={this.props.token} />
+
+
                 </View>
-            </ScrollView>
+            </ScrollView >
         );
     }
 
@@ -383,9 +447,9 @@ class IndexPage extends React.Component {
         return (
             <Provider>
                 <TabBar
-                    unselectedTintColor="#949494"
-                    tintColor="#33A3F4"
-                    barTintColor="#f5f5f5"
+                    unselectedTintColor="#FFFFFF"
+                    tintColor="#33ffff"
+                    barTintColor="#525252"
                 >
                     <TabBar.Item
                         title="首页"
@@ -405,8 +469,8 @@ class IndexPage extends React.Component {
                         {this.renderContentAppes()}
                     </TabBar.Item>
                     <TabBar.Item
-                        icon={<Icon name="message" />}
-                        title="消息"
+                        icon={<Icon name="area-chart" />}
+                        title="分析"
                         selected={this.state.selectedTab === 'message'}
                         onPress={() => this.onChangeTab('message')}
                     >
@@ -458,6 +522,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 36,
     },
+    noticebar:{
+        backgroundColor: '#ffffff',
+    },
     showboxarea: {
         padding: 5,
     },
@@ -476,6 +543,16 @@ const styles = StyleSheet.create({
     showbox_value: {
         fontSize: 22,
         color: '#FFF',
+    },
+    site_notification: {
+        fontFamily: '微软雅黑',
+        fontSize: 16,
+        color: '#000',
+    },
+    site_notification_importent: {
+        fontFamily: '微软雅黑',
+        fontSize: 16,
+        color: '#FF0000',
     },
     appBtn: {
         // justifyContent: 'center',
