@@ -18,6 +18,7 @@ import IQCCheckPage from '../viewbiz/qc/IQCUnqualified';
 import SyncMangerScreen from '../viewbiz/manage/SyncManger';
 import JPushMessageTestScreen from '../viewbiz/test/JPushMessageTest';
 import BackgroudTaskTestScreen from '../viewbiz/test/backtest';
+import ScanQuietRoom from '../viewbiz/test/QuietRoom';
 
 const router = {
     //登陆页面
@@ -62,6 +63,11 @@ const router = {
     BoxInStorage: {
         path: '/BoxInStorage',
         screen: ScanBoxInStorage,
+    },
+    //成品入库扫描(整箱)
+    QuietRoom: {
+        path: '/QuietRoom',
+        screen: ScanQuietRoom,
     },
     //====================================================================================下面是车间现场管理
     //成品检验拼搭
