@@ -14,7 +14,7 @@
     "LogFilename_Exceprion": "logexception.txt"
   },
   "CodePush": {
-    "Server": "http: //10.19.0.58:3000/",
+    "Server": "http://10.19.0.58:3000/",
     "DeploymentKey": "DCxEtcRnNJgGITAjeu4a9r0Bhw1o4ksvOXqog"
   }
 }

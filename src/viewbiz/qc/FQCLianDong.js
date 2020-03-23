@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView, TouchableOpacity, Alert, StyleSheet, Dimensions, InteractionManager, TouchableHighlight, NativeModules } from 'react-native';
+import { Platform, Text, View, ScrollView, TouchableOpacity, Alert, StyleSheet, Dimensions, InteractionManager, TouchableHighlight, NativeModules } from 'react-native';
 import { Input, Button, Header, CheckBox } from 'react-native-elements';
 import { WhiteSpace, WingBlank, Flex, List, Switch, InputItem, Picker, Provider, Toast } from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -10,7 +10,12 @@ import ImagePicker from 'react-native-image-picker';
 import { connect } from 'react-redux';
 
 import { LogInfo, LogError, LogException } from '../../api/Logger';
+
+//这个组件暂时只支持Android
 import { ProcessingManager } from 'react-native-video-processing';
+
+//
+
 // import BackgroundJob from "react-native-background-job";
 // import ErrorUtils from "ErrorUtils";
 
@@ -449,46 +454,49 @@ class FQCLianDong extends React.Component {
 
         RNFS.stat(videopath).then((retobj) => {
             // console.log('文件路径：' + retobj.originalFilepath);
-            LogInfo('上传成品检验（联动）视频开始压缩，', '开始压缩...' + retobj.originalFilepath);
-            ProcessingManager.compress(retobj.originalFilepath, compressOptions)
-                .then((data) => {
+            if (Platform.OS === 'ios') {
+                this.uploadvideoBackTask(formdata, JobKeyStr, retobj.originalFilepath);
+            } else {
+                LogInfo('上传成品检验（联动）视频开始压缩，', '开始压缩...' + retobj.originalFilepath);
+                ProcessingManager.compress(retobj.originalFilepath, compressOptions)
+                    .then((data) => {
+                        LogInfo('上传成品检验（联动）视频压缩完成，', '压缩完成...');
+                        //BackgroundJob.setGlobalWarnings(true);
+                        //console.log('压缩成功!' + data);
+                        this.uploadvideoBackTask(formdata, JobKeyStr, data.source);
+                        // BackgroundJob.register({
+                        //     jobKey: JobKeyStr,
+                        //     job: () => {
+                        //     }
+                        // });
 
-                    LogInfo('上传成品检验（联动）视频压缩完成，', '压缩完成...');
-                    //BackgroundJob.setGlobalWarnings(true);
-                    //console.log('压缩成功!' + data);
-                    this.uploadvideoBackTask(formdata, JobKeyStr, data.source);
-                    // BackgroundJob.register({
-                    //     jobKey: JobKeyStr,
-                    //     job: () => {
-
-                    //     }
-                    // });
-
-                    // BackgroundJob.schedule({
-                    //     jobKey: JobKeyStr,
-                    //     period: 1000,
-                    //     exact: true,
-                    //     allowExecutionInForeground: true
-                    // });
-                    // BackgroundJob.schedule({
-                    //     jobKey: JobKeyStr,
-                    //     notificationTitle: "Notification title",
-                    //     notificationText: "Notification text",
-                    //     allowWhileIdle: true,
-                    //     allowExecutionInForeground: true,
-                    //     period: 1000
-                    // });
+                        // BackgroundJob.schedule({
+                        //     jobKey: JobKeyStr,
+                        //     period: 1000,
+                        //     exact: true,
+                        //     allowExecutionInForeground: true
+                        // });
+                        // BackgroundJob.schedule({
+                        //     jobKey: JobKeyStr,
+                        //     notificationTitle: "Notification title",
+                        //     notificationText: "Notification text",
+                        //     allowWhileIdle: true,
+                        //     allowExecutionInForeground: true,
+                        //     period: 1000
+                        // });
 
 
 
-                }).catch((err) => {
-                    //Alert.alert('压缩视频文件异常！', '异常原因：' + err);
-                    LogError('压缩视频文件异常！', '异常原因：' + err);
-                    //BackgroundJob.cancel({ jobKey: JobKey });
-                    //task_oqc_videouploading = false;
-                    this.setState({ videoloading: false });
-                });
-            // console.log('视频压缩完成！');
+                    }).catch((err) => {
+                        //Alert.alert('压缩视频文件异常！', '异常原因：' + err);
+                        LogError('压缩视频文件异常！', '异常原因：' + err);
+                        //BackgroundJob.cancel({ jobKey: JobKey });
+                        //task_oqc_videouploading = false;
+                        this.setState({ videoloading: false });
+                    });
+                // console.log('视频压缩完成！');
+            }
+
         }).catch((err2) => {
             //Alert.alert('获取视频文件信息异常！', '异常原因：' + err2);
             LogException('获取视频文件信息异常！', '异常原因：' + err2);
@@ -555,7 +563,7 @@ class FQCLianDong extends React.Component {
             <Provider>
                 <ScrollView >
                     <Header
-                        ViewComponent={View }
+                        ViewComponent={View}
                         placement="left"
                         leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                         centerComponent={{ text: '成品联动检验', style: { color: '#fff', fontWeight: 'bold' } }}

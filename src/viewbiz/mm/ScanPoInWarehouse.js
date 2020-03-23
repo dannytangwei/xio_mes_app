@@ -102,11 +102,7 @@ class ScanPoInWarehouse extends React.Component {
     //         })
     // }
 
-    async componentDidMount() {
 
-        await InteractionManager.runAfterInteractions();
-        this.props.navigation.navigate('DrawerClose');
-    }
     //在渲染前调用,在客户端也在服务端
 
     UNSAFE_componentWillMount() {

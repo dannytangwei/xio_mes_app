@@ -1,5 +1,6 @@
 "use strict";
 import React from 'react';
+import {Platform} from 'react-native'
 
 import { Logger } from '../../app.json';
 
@@ -7,7 +8,7 @@ import StringUtil from './StringUtil';
 
 var RNFS = require('react-native-fs');
 
-var appdir = RNFS.ExternalStorageDirectoryPath + '/' + Logger.Log_Dir;
+var appdir = Platform.OS==='ios'?RNFS.DocumentDirectoryPath:RNFS.ExternalStorageDirectoryPath + '/' + Logger.Log_Dir;
 
 var path = appdir + '/' + Logger.LogFilename_Info;
 
