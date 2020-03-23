@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 import FocusTabs from './home/FocusTabs';
 import LinkSystem from './home/LinkSystem';
+import MinePage from './home/MinePage';
 
 // import ErrorUtils from "ErrorUtils";
 const AD_IMAGE1 = require('../assets/ad/ad1.png');
@@ -426,6 +427,7 @@ class IndexPage extends React.Component {
         }
     }
 
+
     renderContent(pageText) {
         return (
             <View  >
@@ -482,7 +484,7 @@ class IndexPage extends React.Component {
                         selected={this.state.selectedTab === 'my'}
                         onPress={() => this.onChangeTab('my')}
                     >
-                        {this.renderContent('My Tab')}
+                        <MinePage token={this.props.token}  navigation = {this.props.navigation}/>
                     </TabBar.Item>
                 </TabBar>
             </Provider>
