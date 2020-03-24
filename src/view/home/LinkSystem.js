@@ -1,6 +1,6 @@
 "use strict";
 import React from 'react';
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, FlatList, Dimensions, Image } from 'react-native';
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, FlatList, Dimensions, Image,VirtualizedList } from 'react-native';
 import { connect } from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
