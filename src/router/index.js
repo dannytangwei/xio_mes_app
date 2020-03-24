@@ -64,7 +64,7 @@ const router = {
         path: '/BoxInStorage',
         screen: ScanBoxInStorage,
     },
-    //成品入库扫描(整箱)
+    //静音房
     QuietRoom: {
         path: '/QuietRoom',
         screen: ScanQuietRoom,
