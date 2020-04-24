@@ -186,9 +186,9 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 scandata_partin, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新建表ScanData_PartInBox');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新建表ScanData_PartInBox', err);
                 });
 
             let scandata_phototake = 'CREATE TABLE IF NOT EXISTS ScanData_PhotoTake(' +
@@ -203,9 +203,9 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 scandata_phototake, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新增表ScanData_PhotoTake');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新增表ScanData_PhotoTake', err);
                 });
 
             let todo_partlist = 'CREATE TABLE IF NOT EXISTS Todo_PartList(' +
@@ -221,9 +221,9 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 todo_partlist, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新增表Todo_PartList');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新增表Todo_PartList', err);
                 });
             let todo_packlist = 'CREATE TABLE IF NOT EXISTS Todo_PackList(' +
                 'id INTEGER PRIMARY KEY  AUTOINCREMENT,' +
@@ -236,15 +236,16 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 todo_packlist, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新增表Todo_PackList');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新增表Todo_PackList', err);
                 });
 
-        }, (err) => {//所有的 transaction都应该有错误的回调方法，在方法里面打印异常信息，不然你可能不会知道哪里出错了。
-            this._errorCB('transaction', err);
+        }, (err) => {
+            //所有的 transaction都应该有错误的回调方法，在方法里面打印异常信息，不然你可能不会知道哪里出错了。
+            this._errorCB('Transaction新增扫码表，错误', err);
         }, () => {
-            this._successCB('transaction');
+            this._successCB('Transaction新增扫码表');
         })
     }
     deleteTable_ScanPartInBox() {
@@ -260,6 +261,11 @@ export default class SQLite extends Component {
             });
             tx.executeSql('delete from Todo_PackList;', [], () => {
             });
+        }, (err) => {
+            //所有的 transaction都应该有错误的回调方法，在方法里面打印异常信息，不然你可能不会知道哪里出错了。
+            this._errorCB('Transaction删除扫码表，错误', err);
+        }, () => {
+            this._successCB('Transaction删除扫码表');
         });
     }
     dropTable_ScanPartInBox() {
@@ -519,9 +525,9 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 scandata_partin, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新建表ScanData_PartInWo');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新建表ScanData_PartInWo', err);
                 });
 
             let scandata_phototake = 'CREATE TABLE IF NOT EXISTS ScanData_PhotoInWo(' +
@@ -536,9 +542,9 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 scandata_phototake, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新建表ScanData_PhotoInWo');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新建表ScanData_PhotoInWo', err);
                 });
 
             let todo_partlist = 'CREATE TABLE IF NOT EXISTS Todo_PartListForWo(' +
@@ -553,9 +559,9 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 todo_partlist, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新建表Todo_PartListForWo');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新建表Todo_PartListForWo', err);
                 });
 
             let todo_packlist = 'CREATE TABLE IF NOT EXISTS Todo_PhotoListForWo(' +
@@ -567,15 +573,16 @@ export default class SQLite extends Component {
                 ');';
             tx.executeSql(
                 todo_packlist, [], () => {
-                    this._successCB('executeSql');
+                    this._successCB('新建表Todo_PhotoListForWo');
                 }, (err) => {
-                    this._errorCB('executeSql', err);
+                    this._errorCB('新建表Todo_PhotoListForWo', err);
                 });
 
-        }, (err) => {//所有的 transaction都应该有错误的回调方法，在方法里面打印异常信息，不然你可能不会知道哪里出错了。
-            this._errorCB('transaction', err);
+        }, (err) => {
+            //所有的 transaction都应该有错误的回调方法，在方法里面打印异常信息，不然你可能不会知道哪里出错了。
+            this._errorCB('transaction新建工单完工扫码表', err);
         }, () => {
-            this._successCB('transaction');
+            this._successCB('transaction新建工单完工扫码表');
         })
     }
     deleteTable_ForWoComplete() {
@@ -591,6 +598,11 @@ export default class SQLite extends Component {
             });
             tx.executeSql('delete from Todo_PhotoListForWo;', [], () => {
             });
+        }, (err) => {
+            //所有的 transaction都应该有错误的回调方法，在方法里面打印异常信息，不然你可能不会知道哪里出错了。
+            this._errorCB('transaction清空工单完工扫码表', err);
+        }, () => {
+            this._successCB('transaction清空工单完工扫码表');
         });
     }
     dropTable_ForWoComplete() {
