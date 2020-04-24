@@ -67,7 +67,7 @@ function isLogining() {
 }
 
 function loginSuccess(isSuccess, user, token) {
-    console.log('success');
+    console.log('loginSuccess!');
     return {
         type: TYPES.LOGIN_IN_DONE,
         user: user,
@@ -76,7 +76,7 @@ function loginSuccess(isSuccess, user, token) {
 }
 
 function loginError(err) {
-    console.log('error');
+    console.log('loginError', err);
     return {
         type: TYPES.LOGIN_IN_ERROR,
         message: err

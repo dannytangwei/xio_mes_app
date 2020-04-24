@@ -1,6 +1,6 @@
 "use strict";
 import React from 'react';
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, FlatList, Dimensions, Image,VirtualizedList } from 'react-native';
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, FlatList, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
@@ -13,27 +13,19 @@ class LinkSystem extends React.PureComponent {
 
         this.state = {
             linksystemes: [
-                { title: 'SAP', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'PCS', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'SRM', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'CRM', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'MES', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'SAP', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'PCS', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'SRM', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'CRM', img: require("../../assets/images/systemicon/default_application.png") },
-                { title: 'MES', img: require("../../assets/images/systemicon/default_application.png") }
+                { id: 1, key: 'SAP', title: 'SAP', img: require("../../assets/images/systemicon/default_application.png") },
+                { id: 2, key: 'PCS', title: 'PCS', img: require("../../assets/images/systemicon/default_application.png") },
+                { id: 3, key: 'SRM', title: 'SRM', img: require("../../assets/images/systemicon/default_application.png") },
+                { id: 4, key: 'CRM', title: 'CRM', img: require("../../assets/images/systemicon/default_application.png") },
+                { id: 5, key: 'MES', title: 'MES', img: require("../../assets/images/systemicon/default_application.png") }
             ]
         };
-
-
     }
-
-
+    _keyExtractor = (item, index) => item.id;
 
     renderLinksystemItem = ({ item }) => {
         return (
-            <TouchableOpacity style={styles.linkItem}>
+            <TouchableOpacity name={item.key} style={styles.linkItem}>
                 <Image source={item.img} style={styles.linkimg} />
                 <View style={styles.linktitleContainer}>
                     <Text style={styles.linktitle} numberOfLines={1}>{item.title}</Text>
@@ -45,12 +37,12 @@ class LinkSystem extends React.PureComponent {
     render() {
         return (
             <View style={styles.moduleBox}>
-               
                 <FlatList
                     data={this.state.linksystemes}
-                    keyExtractor={(item, index) => index}
+                    keyExtractor={item => item.id.toString()}
                     renderItem={this.renderLinksystemItem}
                     horizontal={true}
+                    id="systemLinkList"
                 />
             </View>
         );
@@ -77,7 +69,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingBottom: 0,
         marginTop: 0,
-        
+
     },
     subtitle: {
         fontSize: 16,
@@ -98,8 +90,8 @@ const styles = StyleSheet.create({
     linktitleContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        
-        margin:10,marginTop: 0,
+
+        margin: 10, marginTop: 0,
     },
     linktitle: {
         fontSize: 16,

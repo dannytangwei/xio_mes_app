@@ -7,7 +7,7 @@ import SQLiteStorage from 'react-native-sqlite-storage';
 
 import { LogInfo, LogException, LogError } from '../api/Logger';
 
-SQLiteStorage.DEBUG(true);
+SQLiteStorage.DEBUG(false);
 var database_name = "XioLiftMES.db";//数据库文件
 var database_version = "1.0";//版本号
 var database_displayname = "MESSQLite";

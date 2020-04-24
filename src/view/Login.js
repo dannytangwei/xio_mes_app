@@ -219,7 +219,7 @@ class Login extends React.Component {
                     <WhiteSpace />
                     <Flex justify="center">
                         <Image style={styles.logo} source={Logo_IMAGE} />
-                        <Text style={styles.systemname}>MES系统</Text>
+                        <Text style={styles.systemname}>智能制造系统</Text>
                     </Flex>
 
                     <WingBlank>

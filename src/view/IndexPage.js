@@ -246,7 +246,13 @@ class IndexPage extends React.Component {
                         pagepath: 'ARVR_TEST'
                     }
                 );
-
+                this.state.appBtnTest.push(
+                    {
+                        name: 'WebViewH5 测试',
+                        iconname: 'dash',
+                        pagepath: 'WebViewPage'
+                    }
+                );
                 // this.state.appBtnTest.push(
                 //     {
                 //         name: '后台作业 测试',

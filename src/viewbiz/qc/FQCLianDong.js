@@ -505,11 +505,7 @@ class FQCLianDong extends React.Component {
             this.setState({ videoloading: false });
         });
 
-
-
-
         //console.log(videopath);
-
 
         //开始上传
     }
