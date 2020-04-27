@@ -18,9 +18,9 @@ import IQCCheckPage from '../viewbiz/qc/IQCUnqualified';
 import SyncMangerScreen from '../viewbiz/manage/SyncManger';
 import JPushMessageTestScreen from '../viewbiz/test/JPushMessageTest';
 import BackgroudTaskTestScreen from '../viewbiz/test/backtest';
+import WebViewPageScreen from '../view/WebViewH5'
 import ScanQuietRoom from '../viewbiz/test/QuietRoom';
 import ScanQuietRoomSetting from '../viewbiz/test/QuietRoomSetting';
-
 const router = {
     //登陆页面
     Login: {
@@ -108,6 +108,10 @@ const router = {
     JPushMessageTest: {
         path: '/JPushMessageTest',
         screen: JPushMessageTestScreen,
+    },
+    WebViewPage: {
+        path: '/WebViewPage',
+        screen: WebViewPageScreen,
     },
     // BackgroudTask_TEST: {
     //     path: '/BackgroudTask_TEST',

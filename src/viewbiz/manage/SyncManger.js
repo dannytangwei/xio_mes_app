@@ -10,7 +10,7 @@ import DeviceStorage from '../../api/DeviceStorage';
 import StringUtil from '../../api/StringUtil';
 import ModalDropdown from 'react-native-modal-dropdown';
 
-import Logger from '../../../app.json';
+import { Logger } from '../../../app.json';
 var RNFS = require('react-native-fs');
 
 import SQLite from '../../api/SQLite';
@@ -362,7 +362,7 @@ class SyncManger extends React.Component {
         return (
             <ScrollView>
                 <Header
-                    ViewComponent={View }
+                    ViewComponent={View}
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '同步数据查询', style: { color: '#fff', fontWeight: 'bold' } }}

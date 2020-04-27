@@ -134,6 +134,7 @@ class ScanWoBoxClose extends React.Component {
                 let PartPCNO = partbarcode.split('|')[1];
                 let ScanPONO = this.state.boxno.split('  ')[0];
                 if (PartPCNO != ScanPONO) {
+                    this.setState({ partno_emessage: '扫码部件的合同，与需求不符！' })
                     return ""; //合同不一样，不能扫描入库
                 } else {
                     return partcode.substr(16);
@@ -632,7 +633,7 @@ class ScanWoBoxClose extends React.Component {
         return (
             <ScrollView>
                 <Header
-                    ViewComponent={View }
+                    ViewComponent={View}
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '装箱完工扫描', style: { color: '#fff', fontWeight: 'bold' } }}

@@ -1,6 +1,6 @@
 "use strict";
 import React from 'react';
-import {Platform} from 'react-native'
+import { Platform } from 'react-native'
 
 import { Logger } from '../../app.json';
 
@@ -8,7 +8,7 @@ import StringUtil from './StringUtil';
 
 var RNFS = require('react-native-fs');
 
-var appdir = Platform.OS==='ios'?RNFS.DocumentDirectoryPath:RNFS.ExternalStorageDirectoryPath + '/' + Logger.Log_Dir;
+var appdir = Platform.OS === 'ios' ? RNFS.DocumentDirectoryPath : RNFS.ExternalStorageDirectoryPath + '/' + Logger.Log_Dir;
 
 var path = appdir + '/' + Logger.LogFilename_Info;
 
@@ -66,7 +66,7 @@ function getmyDate() {
 
 
 function LogInfo(title, message) {
-    console.info(path);
+    //console.info(path);
     let content = '[' + getmyDate() + '] ' + title + '==>' + message + '。\r\n';
     RNFS.appendFile(path, content, 'utf8')
         .then((success) => {

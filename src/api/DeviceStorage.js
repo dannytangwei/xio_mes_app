@@ -1,54 +1,54 @@
+"use strict";
 import React from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-class DeviceStorage {
-    /**
-     * 获取
-     * @param key
-     * @returns {Promise<T>|*|Promise.<TResult>}
-     */
-
-    static get(key) {
-        return AsyncStorage.getItem(key).then((value) => {
-            const jsonValue = JSON.parse(value);
-            return jsonValue;
-        });
-    }
-
-
-    /**
-     * 保存
-     * @param key
-     * @param value
-     * @returns {*}
-     */
-    static save(key, value) {
-        return AsyncStorage.setItem(key, JSON.stringify(value));
-    }
-
-
-    /**
-     * 更新
-     * @param key
-     * @param value
-     * @returns {Promise<T>|Promise.<TResult>}
-     */
-    static update(key, value) {
-        return DeviceStorage.get(key).then((item) => {
-            value = typeof value === 'string' ? value : Object.assign({}, item, value);
-            return AsyncStorage.setItem(key, JSON.stringify(value));
-        });
-    }
-
-
-    /**
-     * 删除
-     * @param key
-     * @returns {*}
-     */
-    static delete(key) {
-        return AsyncStorage.removeItem(key);
+async function DeviceStorage(key, value) {
+    try {
+        await AsyncStorage.setItem(
+            key,
+            value,
+            (error) => {
+                if (error) {
+                    console.log('保存' + key + '内部存储异常！error=' + error)
+                }
+            }
+        );
+        console.log('保存' + key + '内部存储成功！value=' + value)
+    } catch (e) {
+        console.log('保存' + key + '内部存储异常！error=' + e)
+        return false
+        // saving error
     }
 }
 
-export default DeviceStorage;
+async function DeviceReadStorage(key) {
+    try {
+        let ret = ''
+        await AsyncStorage.getItem(
+            key,
+            (error, result) => {
+                if (error) {
+                    console.log('获取内部存储' + key + '错误！erroe=', error)
+                }
+                ret = result
+                console.log('获取内部存储' + key + '成功！Value=', result)
+            }
+        );
+        return ret
+    } catch (e) {
+        console.log('获取内部存储' + key + 'Error=', e)
+        return null
+    }
+}
+
+async function DeviceRemoveStorage(key) {
+    try {
+        await AsyncStorage.removeItem(key);
+        return true
+    } catch (e) {
+        console.log('删除' + key + '内部存储异常！error=' + e)
+        return false
+    }
+}
+
+export { DeviceStorage, DeviceReadStorage, DeviceRemoveStorage }

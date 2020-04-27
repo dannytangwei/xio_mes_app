@@ -18,5 +18,12 @@
   "CodePush": {
     "Server": "http://10.19.0.58:3000/",
     "DeploymentKey": "DCxEtcRnNJgGITAjeu4a9r0Bhw1o4ksvOXqog"
+  },
+  "OSSMinio": {
+    "endPoint": "10.19.0.119",
+    "port": 9000,
+    "useSSL": false,
+    "accessKey": "minioadmin",
+    "secretKey": "minioadmin"
   }
 }

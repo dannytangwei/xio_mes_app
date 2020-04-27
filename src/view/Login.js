@@ -1,14 +1,16 @@
+"use strict";
 import React, { Component } from 'react';
 
 import { StyleSheet, ScrollView, Text, View, Image, Alert, YellowBox, TouchableOpacity, Dimensions, Platform, PermissionsAndroid } from 'react-native';
 import { Input, Button } from 'react-native-elements';
-import { WhiteSpace, WingBlank, Flex } from '@ant-design/react-native';
+import { WhiteSpace, WingBlank, Flex, Icon, Modal, Provider } from '@ant-design/react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 //import { HTTPPOST } from '../api/HttpRequest'
 import { connect } from 'react-redux';
 import * as loginAction from '../store/actions/Login'
 import { loginUser, AppVersion } from '../../app.json';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import { DeviceStorage, DeviceReadStorage } from '../api/DeviceStorage'
 // import NfcManager, { Ndef } from 'react-native-nfc-manager';
 // import ErrorUtils from "ErrorUtils";
 
@@ -38,6 +40,8 @@ class Login extends React.Component {
             enabled: false,
             tag: {},
             parsed: null,
+            //应用程序服务端地址
+            ApiservBaseurl: ''
         };
 
         this.checkusername = this.checkusername.bind(this);
@@ -209,61 +213,94 @@ class Login extends React.Component {
         let { tag } = this.state;
 
         return (
-            <ScrollView>
-                <WingBlank>
-                    <WhiteSpace />
-                    <WhiteSpace />
-                    <WhiteSpace />
-                    <WhiteSpace />
-                    <WhiteSpace />
-                    <WhiteSpace />
-                    <Flex justify="center">
-                        <Image style={styles.logo} source={Logo_IMAGE} />
-                        <Text style={styles.systemname}>MES系统</Text>
-                    </Flex>
+            <Provider>
+                <ScrollView>
+                    <WingBlank style={styles.container}>
 
-                    <WingBlank>
-                        <WhiteSpace />
-                        <WhiteSpace />
-                        <WhiteSpace />
-                        <WhiteSpace />
-                        <Input
-                            label="用户名："
-                            value={this.state.username}
-                            onChangeText={this.checkusername}
+                        <Flex justify="center">
+                            <Image style={styles.logo} source={Logo_IMAGE} />
+                            <Text style={styles.systemname}>智能制造系统</Text>
+                        </Flex>
 
-                            errorMessage={this.state.username_emessage}
-                        />
-                        <WhiteSpace />
-                        <WhiteSpace />
+                        <WingBlank>
+                            <WhiteSpace />
+                            <WhiteSpace />
+                            <WhiteSpace />
+                            <WhiteSpace />
+                            <Input
+                                label="用户名："
+                                value={this.state.username}
+                                onChangeText={this.checkusername}
 
-                        <Input label="密码："
-                            type="text"
-                            secureTextEntry={true}
-                            value={this.state.password}
-                            onChangeText={this.checkpassword}
-                            errorMessage={this.state.password_emessage}
-                        />
-                        <WhiteSpace />
-                        <WhiteSpace />
-                        <WhiteSpace />
-                        <WhiteSpace />
+                                errorMessage={this.state.username_emessage}
+                            />
+                            <WhiteSpace />
+                            <WhiteSpace />
+
+                            <Input label="密码："
+                                type="text"
+                                secureTextEntry={true}
+                                value={this.state.password}
+                                onChangeText={this.checkpassword}
+                                errorMessage={this.state.password_emessage}
+                            />
+                            <WhiteSpace />
+                            <WhiteSpace />
+                            <WhiteSpace />
+                            <WhiteSpace />
+                        </WingBlank>
+                        <WingBlank>
+
+                            <Button
+                                onPress={this.submitLogin.bind(this)}
+                                loading={submitLoading} title="登   录 （支持员工卡识别进入）" />
+
+                            <Text>{tag ? '识别到卡：' + tag.id + '' : ''}</Text>
+                        </WingBlank>
+                        <View style={styles.copyright}>
+                            <Text>copyright: XioLift IT V{AppVersion}</Text>
+                        </View>
+                        <View style={styles.serverSetting}>
+                            <Icon name="cloud-server" size="lg" color="#000000" onPress={this.doServerSetting.bind(this)} />
+                        </View>
                     </WingBlank>
-                    <WingBlank>
-
-                        <Button
-                            onPress={this.submitLogin.bind(this)}
-                            loading={submitLoading} title="登   录 （支持员工卡识别进入）" />
-
-                        <Text>{tag ? '识别到卡：' + tag.id + '' : ''}</Text>
-                    </WingBlank>
-                    <View style={styles.copyright}>
-                        <Text>copyright: XioLift IT V{AppVersion}</Text>
-                    </View>
-                </WingBlank>
-            </ScrollView>
+                </ScrollView>
+            </Provider>
         );
     }
+
+    //配置服务端API地址
+    doServerSetting() {
+        try {
+            AsyncStorage.getItem(
+                'ApiservBaseurl',
+                (error, result) => {
+                    if (error) {
+                        console.log('获取内部存储ApiservBaseurl错误！erroe=', error)
+                    }
+
+                    console.log('获取内部存储ApiservBaseurl成功！Value=', result)
+                    this.setState({ ApiservBaseurl: result })
+
+                    Modal.prompt(
+                        '服务器端地址',
+                        '配置应用程序服务端地址信息',
+                        value => {
+                            console.log(`ApiservBaseurl: ${value}`)
+                            DeviceStorage('ApiservBaseurl', value)
+                        },
+                        'default',
+                        this.state.ApiservBaseurl,
+                        ['请输入应用服务端地址']
+                    );
+                }
+            );
+        } catch (e) {
+            console.log('获取内部存储' + key + 'Error=', e)
+        }
+
+    }
+
 }
 
 
@@ -279,10 +316,10 @@ export default connect(//将页面与store内的state、action关联在一起，
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 80,
-        justifyContent: 'flex-start'
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        height: SCREEN_HEIGHT
     },
     logo: {
         width: 150,
@@ -298,6 +335,13 @@ const styles = StyleSheet.create({
         width: SCREEN_WIDTH,
 
         alignItems: 'center'
+    }
+    ,
+    serverSetting: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: 20,
     }
 });
 

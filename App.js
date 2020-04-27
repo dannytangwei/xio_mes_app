@@ -25,6 +25,7 @@ import SQLite from './src/api/SQLite';
 import { LogInfo, LogException } from './src/api/Logger';
 import BackgroundJob from "react-native-background-job";
 
+
 const AppNavigator = createStackNavigator(
   router,
   {
@@ -41,8 +42,11 @@ export default class App extends Component {
     sqLite.clean_DBData();
     //暂时停用此功能，在局域网内比较麻烦
 
+
     BackgroundJob.cancelAll();
     LogInfo('后台任务被清除！', '');
+    //初始化全局参数
+
   }
   render() {
     return Platform.OS == "ios" ? (
