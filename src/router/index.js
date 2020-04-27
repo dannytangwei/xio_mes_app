@@ -19,6 +19,7 @@ import SyncMangerScreen from '../viewbiz/manage/SyncManger';
 import JPushMessageTestScreen from '../viewbiz/test/JPushMessageTest';
 import BackgroudTaskTestScreen from '../viewbiz/test/backtest';
 import ScanQuietRoom from '../viewbiz/test/QuietRoom';
+import ScanQuietRoomSetting from '../viewbiz/test/QuietRoomSetting';
 
 const router = {
     //登陆页面
@@ -68,6 +69,11 @@ const router = {
     QuietRoom: {
         path: '/QuietRoom',
         screen: ScanQuietRoom,
+    },
+    //静音房配置
+    QuietRoomSetting: {
+        path: '/QuietRoomSetting',
+        screen: ScanQuietRoomSetting,
     },
     //====================================================================================下面是车间现场管理
     //成品检验拼搭

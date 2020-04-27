@@ -223,6 +223,14 @@ class IndexPage extends React.Component {
                     }
                 );
 
+                this.state.appBtnTest.push(
+                     {
+                         name: '静音房',
+                         iconname: 'dash',
+                         pagepath: 'QuietRoom'
+                     }
+                 );
+
                 // this.state.appBtnTest.push(
                 //     {
                 //         name: '音频操作测试',

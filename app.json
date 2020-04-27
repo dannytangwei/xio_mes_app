@@ -2,10 +2,12 @@
   "name": "xio_mes_app",
   "displayName": "xio_mes_app",
   "loginUser": {
-    "username": "",
-    "password": ""
+    "username": "admin",
+    "password": "xio123"
   },
   "ApiservBaseurl": "http://mesapi.xiolift.com:10080/AppSMAPI",
+  // "ApiservBaseurl": "http://10.19.8.153:10080/AppSMAPI",
+  "ApiservBaseQuieturl": "http://10.19.8.153:8085",
   "AppVersion": "1.0.12",
   "Logger": {
     "Log_Dir": "xioliftmes",

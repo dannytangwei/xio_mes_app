@@ -759,4 +759,113 @@ export default class SQLite extends Component {
             this._successCB('transaction insert data');
         });
     }
+
+    //=========================================================111111111111111111111111 Start 静音设备配置
+    async createTable_MuteConfiguration() {
+        if (!db) {
+            this.open();
+        }
+        //新建数据表
+        await db.transaction((tx) => {
+
+            let mute_partin = 'CREATE TABLE IF NOT EXISTS MuteData_PartIn(' +
+                'id INTEGER PRIMARY KEY  AUTOINCREMENT,' +
+                'nb VARCHAR,' +
+                'device VARCHAR,' +
+                'ipdz VARCHAR,' +
+                'station VARCHAR,' +
+                'orientation VARCHAR' +
+                ')';
+            tx.executeSql(
+                mute_partin, [], () => {
+                    this._successCB('executeSql');
+                }, (err) => {
+                    this._errorCB('executeSql', err.message);
+                });
+                
+        }, (err) => {//所有的 transaction都应该有错误的回调方法，在方法里面打印异常信息，不然你可能不会知道哪里出错了。
+            this._errorCB('transaction', err);
+        }, () => {
+            this._successCB('transaction');
+        })
+    }
+    deleteTable_MuteConfiguration() {
+        if (!db) {
+            this.open();
+        }
+        db.transaction((tx) => {
+            tx.executeSql('delete from MuteData_PartIn;', [], () => {
+            });
+        });
+    }
+    dropTable_MuteConfiguration() {
+        db.transaction((tx) => {
+            let droptable = 'drop table MuteData_PartIn;';
+            tx.executeSql(droptable, [], () => {
+            });
+        }, (err) => {
+            this._errorCB('transaction', err);
+        }, () => {
+            this._successCB('transaction');
+        });
+    }
+
+    //插入静音配置
+    async insertData_MuteConfiguration(mutedata) {
+        let len = mutedata.length;
+        if (!db) {
+            this.open();
+        }
+        await db.transaction((tx) => {
+            for (let i = 0; i < len; i++) {
+                var mutedinfo = mutedata[i];
+                let nb = mutedinfo.nb;
+                let device = mutedinfo.device;
+                let ipdz = mutedinfo.ipdz;
+                let station = mutedinfo.station;
+                let orientation = mutedinfo.orientation;
+                let sql = "INSERT INTO MuteData_PartIn(nb,device,ipdz,station,orientation)" +
+                    "values(?,?,?,?,?);";
+                    tx.executeSql(sql, [nb, device, ipdz, station, orientation], () => {
+                    console.info("成功插入 "+len+" 条数据");
+                }, (err) => {
+                    console.log(err);
+                }
+                );
+            }
+        }, (error) => {
+            this._errorCB('transaction', error);
+        }, () => {
+            this._successCB('transaction insert data');
+        });
+    }
+
+    //更新静音配置
+    async upData_MuteConfiguration(mutedata) {
+        let len = mutedata.length;
+        if (!db) {
+            this.open();
+        }
+        await db.transaction((tx) => {
+            for (let i = 0; i < len; i++) {
+                var mutedinfo = mutedata[i];
+                let device = mutedinfo.device;
+                let ipdz = mutedinfo.ipdz;
+                let station = mutedinfo.station;
+                let orientation = mutedinfo.orientation;
+                let id = mutedinfo.id;
+                let sql2 = "update MuteData_PartIn set device='"+device+"', ipdz='"+ipdz+"', station='"+station+"', orientation='"+orientation+"' where id=" + id + "";
+                tx.executeSql(sql2, [], () => {
+                    console.info("更新 "+len+" 条数据");
+                }, (err) => {
+                    console.log(err);
+                }
+                );
+            }
+        }, (error) => {
+            this._errorCB('transaction', error);
+        }, () => {
+            this._successCB('transaction update data');
+        });
+    }
 }
