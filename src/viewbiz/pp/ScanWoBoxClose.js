@@ -482,6 +482,12 @@ class ScanWoBoxClose extends React.Component {
     //箱子完工扫描提交
     submitForm_boxclose() {
         let { status, user, token } = this.props;
+
+        if (this.lastPressed_boxclose && this.lastPressed_boxclose + 500 >= Date.now()) {
+            return;
+        }
+        this.lastPressed_boxclose = Date.now();
+
         let data = {
             code: user.code,
             packBarCode: this.state.boxno

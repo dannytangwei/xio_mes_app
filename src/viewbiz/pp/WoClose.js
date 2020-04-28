@@ -542,6 +542,12 @@ class WoClose extends React.Component {
     //箱子完工扫描提交
     submitForm_woclose() {
         let { status, user, token } = this.props;
+
+        if (this.lastPressed_woclose && this.lastPressed_woclose + 500 >= Date.now()) {
+            return;
+        }
+        this.lastPressed_woclose = Date.now();
+
         let wowgifo = "";
         this.state.wodata.forEach(woelement => {
             wowgifo = wowgifo + woelement.id08 + ":" + woelement.gamng + ":" + "0;"
@@ -566,8 +572,8 @@ class WoClose extends React.Component {
             Alert.alert('错误！', '工单关键部件还没扫描完成，不能完工。');
             return;
         }
-
         this.setState({ submitLoading_BoxClose: true });
+
         HTTPPOST('/sm/GDWG', data, token)
             .then((res) => {
                 if (res.code >= 1) {
@@ -682,7 +688,7 @@ class WoClose extends React.Component {
         return (
             <ScrollView>
                 <Header
-                    ViewComponent={View }
+                    ViewComponent={View}
                     placement="left"
                     leftComponent={{ icon: 'home', color: '#fff', onPress: this.gohome.bind(this) }}
                     centerComponent={{ text: '工单完工扫描', style: { color: '#fff', fontWeight: 'bold' } }}
