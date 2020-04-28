@@ -4,7 +4,7 @@ import React from 'react';
 import { ApiservBaseurl, ApiservBaseQuieturl } from '../../app.json';
 import { LogInfo, LogException, LogError } from './Logger';
 import AsyncStorage from '@react-native-community/async-storage';
-import { ApiservBaseurl } from '../../app.json';import { DeviceStorage, DeviceReadStorage } from './DeviceStorage';
+import { DeviceStorage, DeviceReadStorage } from './DeviceStorage';
 
 //封装的请求  带超时
 const _timeout = 20 * 1000  //默认10秒
