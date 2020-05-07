@@ -19,8 +19,8 @@ import SyncMangerScreen from '../viewbiz/manage/SyncManger';
 import JPushMessageTestScreen from '../viewbiz/test/JPushMessageTest';
 import BackgroudTaskTestScreen from '../viewbiz/test/backtest';
 import WebViewPageScreen from '../view/WebViewH5'
-import ScanQuietRoom from '../viewbiz/test/QuietRoom';
-import ScanQuietRoomSetting from '../viewbiz/test/QuietRoomSetting';
+import ScanQuietRoom from '../viewbiz/pp/QuietRoom';
+import ScanQuietRoomSetting from '../viewbiz/pp/QuietRoomSetting';
 const router = {
     //登陆页面
     Login: {

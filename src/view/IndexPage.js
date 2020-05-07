@@ -133,16 +133,7 @@ class IndexPage extends React.Component {
                         pagepath: 'WoBoxClose'
                     }
                 )
-
-                this.state.appBtnTest.push(
-                    {
-                        name: '同步数据查询',
-                        iconname: 'sync',
-                        pagepath: 'SyncManager'
-                    }
-                )
-            }
-            if (user.barRoleText.includes('入库管理') == true) {
+                
                 this.state.appBtnes.push(
                     {
                         name: '成品入库扫描',
@@ -150,6 +141,17 @@ class IndexPage extends React.Component {
                         pagepath: 'BoxInStorage'
                     }
                 )
+
+                this.state.appBtnes.push(
+                    {
+                        name: '静音房',
+                        iconname: 'sound',
+                        pagepath: 'QuietRoom'
+                    }
+                )
+            }
+            if (user.barRoleText.includes('入库管理') == true) {
+                
             }
 
             if (user.barRoleText.includes('发运管理') == true) {
@@ -210,6 +212,13 @@ class IndexPage extends React.Component {
             if (user.loginName == 'admin') {
                 this.state.appBtnTest.push(
                     {
+                        name: '同步数据查询',
+                        iconname: 'sync',
+                        pagepath: 'SyncManager'
+                    }
+                )
+                this.state.appBtnTest.push(
+                    {
                         name: 'NFC_M1TEST',
                         iconname: 'dash',
                         pagepath: 'NFCMifareTest'
@@ -224,20 +233,12 @@ class IndexPage extends React.Component {
                 );
 
                 this.state.appBtnTest.push(
-                     {
-                         name: '静音房',
-                         iconname: 'dash',
-                         pagepath: 'QuietRoom'
-                     }
-                 );
-
-                // this.state.appBtnTest.push(
-                //     {
-                //         name: '音频操作测试',
-                //         iconname: 'dash',
-                //         pagepath: 'AudioTest'
-                //     }
-                // );
+                    {
+                        name: '音频操作测试',
+                        iconname: 'dash',
+                        pagepath: 'AudioTest'
+                    }
+                );
 
                 this.state.appBtnTest.push(
                     {
