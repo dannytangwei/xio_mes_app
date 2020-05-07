@@ -126,15 +126,18 @@ class QuietRoom extends React.Component {
     getparameter() {
         let { status, user, token } = this.props;
         let theorderno = this.state.orderno;
+        let arr=theorderno.trim().split(/\s+/);
+        let orderno = arr[0];
 
         if (theorderno == "") {
             return;
         }
 
         let datareq = {
-            hth: theorderno,
+            hth: orderno,
             stationCode: "P5007",
         }
+        console.log(datareq)
         this.setState({ datalist: [] });
         HTTPPOST('/silenceRoom/listStationParam', datareq, token)
             .then((res) => {
