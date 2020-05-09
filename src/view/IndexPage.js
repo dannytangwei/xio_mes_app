@@ -65,6 +65,8 @@ class IndexPage extends React.Component {
             appBtnMM: [],
             //质检管理功能按钮
             appBtnQC: [],
+            //扶梯噪音管理功能按钮
+            appBtnQR: [],
             //开发测试使用
             appBtnTest: [],
             //默认打开的结点
@@ -141,14 +143,6 @@ class IndexPage extends React.Component {
                         pagepath: 'BoxInStorage'
                     }
                 )
-
-                this.state.appBtnes.push(
-                    {
-                        name: '静音房',
-                        iconname: 'sound',
-                        pagepath: 'QuietRoom'
-                    }
-                )
             }
             if (user.barRoleText.includes('入库管理') == true) {
                 
@@ -208,6 +202,19 @@ class IndexPage extends React.Component {
                     }
                 )
             }
+
+            ///====================>>>>>>>>>>>>>>>>>>>>静音检测
+            if (user.barRoleText.includes('扶梯噪音检测') == true) {
+
+                this.state.appBtnQR.push(
+                    {
+                        name: '静音房',
+                        iconname: 'sound',
+                        pagepath: 'QuietRoom'
+                    }
+                )
+            }
+
             ///====================>>>>>>>>>>>>>>>>>>>>开发测试
             if (user.loginName == 'admin') {
                 this.state.appBtnTest.push(
@@ -395,6 +402,8 @@ class IndexPage extends React.Component {
                 {this.showAppFunc("生产管理", this.state.appBtnPP)}
 
                 {this.showAppFunc("质检管理", this.state.appBtnQC)}
+                
+                {this.showAppFunc("扶梯静音检测", this.state.appBtnQR)}
 
                 {this.showAppFunc("管理和测试功能", this.state.appBtnTest)}
             </ScrollView>
@@ -460,7 +469,7 @@ class IndexPage extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         let { status, user } = this.props;
-        //Alert.alert(user.barRoleText);
+        //console.log(user.barRoleText);
         return (
             <Provider>
                 <TabBar
