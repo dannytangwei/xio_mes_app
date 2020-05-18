@@ -24,6 +24,16 @@ export const login = (user) => {
     }
 }
 
+/** 
+ * 登出系统
+*/
+export const loginout = () => {
+    return dispatch => {
+        dispatch(logOut());
+        // 模拟用户登录
+    }
+}
+
 //按
 export const loginbynfc = (nfcid) => {
     return dispatch => {
@@ -80,6 +90,14 @@ function loginError(err) {
     return {
         type: TYPES.LOGIN_IN_ERROR,
         message: err
+    }
+}
+
+
+function logOut() {
+    console.log('loginOut');
+    return {
+        type: TYPES.LOGIN_OUT 
     }
 }
 
