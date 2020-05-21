@@ -18,27 +18,27 @@ const _token = ''
 const _timeoutForFileUpload = 120 * 1000  //默认120秒
 const basequieturl = ApiservBaseQuieturl  //静音房接口地址
 
-initHttp();
-//初始化Http
-function initHttp() {
-    //将服务API地址存储到内部
-    try {
-        AsyncStorage.getItem(
-            'ApiservBaseurl',
-            (error, result) => {
-                if (error) {
-                    console.log('获取内部存储' + key + '错误！erroe=', error)
-                }
-                console.log('获取内部存储' + key + '成功！Value=', result)
-                if (!result) {
-                    // DeviceStorage('ApiservBaseurl', ApiservBaseurl)
-                }
-            }
-        );
-    } catch (e) {
-        console.log('获取内部存储' + key + 'Error=', e)
-    }
-}
+// initHttp();
+// //初始化Http
+// function initHttp() {
+//     //将服务API地址存储到内部
+//     try {
+//         AsyncStorage.getItem(
+//             'ApiservBaseurl',
+//             (error, result) => {
+//                 if (error) {
+//                     console.log('获取内部存储' + key + '错误！erroe=', error)
+//                 }
+//                 console.log('获取内部存储' + key + '成功！Value=', result)
+//                 if (!result) {
+//                     // DeviceStorage('ApiservBaseurl', ApiservBaseurl)
+//                 }
+//             }
+//         );
+//     } catch (e) {
+//         console.log('获取内部存储' + key + 'Error=', e)
+//     }
+// }
 
 //GET请求
 async function HTTPGET(url, token = _token, version = _version, timeout = _timeout) {
