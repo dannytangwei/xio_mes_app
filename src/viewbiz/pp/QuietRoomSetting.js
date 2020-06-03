@@ -149,6 +149,55 @@ class QuietRoomSetting extends React.Component {
         Alert.alert('提交成功')
     }
 
+    async dataCs(token) {
+        //开启数据库
+        if (!db) {
+            db = sqLite.open();
+        }
+
+        //数据
+        var mutedata = [];
+        let mute1={
+            nb: 1,
+            id: this.state.id1,
+            device: this.state.deviceId1,
+            ipdz: this.state.ip1,
+            station: this.state.station1[0],
+            orientation: this.state.orientation1[0],
+        }
+        let mute2={
+            nb: 2,
+            id: this.state.id2,
+            device: this.state.deviceId2,
+            ipdz: this.state.ip2,
+            station: this.state.station2[0],
+            orientation: this.state.orientation2[0],
+        }
+        let mute3={
+            nb: 3,
+            id: this.state.id3,
+            device: this.state.deviceId3,
+            ipdz: this.state.ip3,
+            station: this.state.station3[0],
+            orientation: this.state.orientation3[0],
+        }
+        let mute4={
+            nb: 4,
+            id: this.state.id4,
+            device: this.state.deviceId4,
+            ipdz: this.state.ip4,
+            station: this.state.station4[0],
+            orientation: this.state.orientation4[0],
+        }
+        mutedata.push(mute1);
+        mutedata.push(mute2);
+        mutedata.push(mute3);
+        mutedata.push(mute4);
+        //新增数据
+        await sqLite.insertData_MuteConfiguration(mutedata)
+        Alert.alert('创建成功')
+    }
+
     async selectMute(token) {
         if (!db) {
             db = sqLite.open();
@@ -432,12 +481,12 @@ class QuietRoomSetting extends React.Component {
                                 title='提交' />
 
                         <WhiteSpace size="sm" />
-                        {/* <Button backgroundColor='#6495ed'
-                                onPress={this.submitForm.bind(this)}
+                        <Button backgroundColor='#6495ed'
+                                onPress={this.dataCs.bind(this)}
                                 loading={this.state.submitLoading}
-                                title='插入' />
+                                title='创建初始化数据' />
 
-                        <WhiteSpace size="sm" />      
+                        {/* <WhiteSpace size="sm" />      
                         <Button backgroundColor='#6495ed'
                                 onPress={this.dMute.bind(this)}
                                 loading={this.state.submitLoading}

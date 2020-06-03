@@ -18,7 +18,7 @@ const _token = ''
 const _timeoutForFileUpload = 120 * 1000  //默认120秒
 const basequieturl = ApiservBaseQuieturl  //静音房接口地址
 
-initHttp();
+//initHttp();
 //初始化Http
 function initHttp() {
     //将服务API地址存储到内部

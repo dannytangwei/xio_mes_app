@@ -255,10 +255,11 @@ class QuietRoom extends React.Component {
     //开始噪音检测
     start(index) {
         let { status, user, token } = this.props;
-        let theorderno = this.state.orderno;
+        let theorderno1 = this.state.orderno;
+        let theorderno = theorderno1.trim().split(/\s+/);
         let userId = user.pkid
              
-        if (theorderno == "") {
+        if (theorderno1 == "") {
             Alert.alert('错误', '请扫描排产编号信息！');
             return;
         } 
@@ -300,14 +301,14 @@ class QuietRoom extends React.Component {
                                 ip2: m1.ipdz
                             });
                             let dataType1 = {
-                                hth: theorderno,
+                                hth: theorderno[0],
                                 type: index,   //0表示环境，1上行，2下行
                                 code: this.state.code1,
                                 ip: this.state.ip1,
                                 userId: userId
                             }
                             let dataType2 = {
-                                hth: theorderno,
+                                hth: theorderno[0],
                                 type: index,   //0表示环境，1上行，2下行
                                 code: this.state.code2,
                                 ip: this.state.ip2,
@@ -325,6 +326,7 @@ class QuietRoom extends React.Component {
                                         Alert.alert(res.msg);
                                     }
                                 }).catch((error) => {
+                                    LogException('异常' + error.message);
                                     Alert.alert('异常', error);
                                 });
                             //
@@ -338,6 +340,7 @@ class QuietRoom extends React.Component {
                                         Alert.alert(res.msg);
                                     }
                                 }).catch((error) => {
+                                    LogException('异常' + error.message);
                                     Alert.alert('异常', error);
                                 });
                             //
@@ -368,14 +371,14 @@ class QuietRoom extends React.Component {
                                 ip2: m1.ipdz
                             });
                             let dataType1 = {
-                                hth: theorderno,
+                                hth: theorderno[0],
                                 type: index,   //0表示环境，1上行，2下行
                                 code: this.state.code1,
                                 ip: this.state.ip1,
                                 userId: userId
                             }
                             let dataType2 = {
-                                hth: theorderno,
+                                hth: theorderno[0],
                                 type: index,   //0表示环境，1上行，2下行
                                 code: this.state.code2,
                                 ip: this.state.ip2,
@@ -422,24 +425,25 @@ class QuietRoom extends React.Component {
 
     //暂停噪音检测
     pause(index) {
-        let { status, user, token } = this.props;
-        let theorderno = this.state.orderno;
+        let { status, user, token } = this.props;333
+        let theorderno1 = this.state.orderno;
+        let theorderno = theorderno1.trim().split(/\s+/);
         let userId = user.pkid
 
-        if (theorderno == "") {
+        if (theorderno1 == "") {
             Alert.alert('错误', '请扫描排产编号信息！');
             return;
         } 
         
         let dataType1 = {
-            hth: theorderno,
+            hth: theorderno[0],
             type: index,   //0表示环境，1上行，2下行
             code: this.state.code1,
             ip: this.state.ip1,
             userId: userId
         }
         let dataType2 = {
-            hth: theorderno,
+            hth: theorderno[0],
             type: index,   //0表示环境，1上行，2下行
             code: this.state.code2,
             ip: this.state.ip2,
@@ -509,23 +513,24 @@ class QuietRoom extends React.Component {
     //结束噪音检测
     end(index) {
         let { status, user, token } = this.props;
-        let theorderno = this.state.orderno;
+        let theorderno1 = this.state.orderno;
+        let theorderno = theorderno1.trim().split(/\s+/);
         let userId = user.pkid
 
-        if (theorderno == "") {
+        if (theorderno1 == "") {
             Alert.alert('错误', '请扫描排产编号信息！');
             return;
         } 
         
         let dataType1 = {
-            hth: theorderno,
+            hth: theorderno[0],
             type: index,   //0表示环境，1上行，2下行
             code: this.state.code1,
             ip: this.state.ip1,
             userId: userId
         }
         let dataType2 = {
-            hth: theorderno,
+            hth: theorderno[0],
             type: index,   //0表示环境，1上行，2下行
             code: this.state.code2,
             ip: this.state.ip2,
@@ -595,9 +600,10 @@ class QuietRoom extends React.Component {
     //获取平均值
     average(index) {
         let { status, user, token } = this.props;
-        let theorderno = this.state.orderno;
+        let theorderno1 = this.state.orderno;
+        let theorderno = theorderno1.trim().split(/\s+/);
 
-        if (theorderno == "") {
+        if (theorderno1 == "") {
             Alert.alert('错误', '请扫描排产编号信息！');
             return;
         } 
@@ -605,7 +611,7 @@ class QuietRoom extends React.Component {
         let dataType = {
             code1: this.state.code1,
             code2: this.state.code2,
-            hth: theorderno,
+            hth: theorderno[0],
             type: index,   //0表示环境，1上行，2下行
         }
         HTTPPOST('/silenceRoom/listResultInfo', dataType, token)
@@ -989,7 +995,7 @@ class QuietRoom extends React.Component {
                                         </View>
                                     </Flex>
                                 </View>
-                                {/* <View>
+                                <View>
                                     <ScrollView style={styles.parameterlist}>
                                         {
                                             this.state.datalist.map((l,i) => (
@@ -1003,7 +1009,7 @@ class QuietRoom extends React.Component {
                                             ))
                                         }
                                     </ScrollView>
-                                </View> */}
+                                </View>
                             </Tabs>
                         </View>
 

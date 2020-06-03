@@ -6,7 +6,9 @@
     "password": ""
   },
   "ApiservBaseurl": "http://mesapi.xiolift.com:10080/AppSMAPI",
-  "ApiservBaseQuieturl": "http://10.19.89.240:8085",
+  //"ApiservBaseurl": "http://10.19.195.89:10080/AppSMAPI",
+  "ApiservBaseQuieturl": "http://10.19.89.12:8085",
+  //"ApiservBaseQuieturl": "http://10.19.195.89:8085",
   "AppVersion": "1.0.12",
   "Logger": {
     "Log_Dir": "xioliftmes",

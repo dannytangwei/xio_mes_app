@@ -260,9 +260,9 @@ class Login extends React.Component {
                         <View style={styles.copyright}>
                             <Text>copyright: XioLift IT V{AppVersion}</Text>
                         </View>
-                        <View style={styles.serverSetting}>
+                        {/* <View style={styles.serverSetting}>
                             <Icon name="cloud-server" size="lg" color="#000000" onPress={this.doServerSetting.bind(this)} />
-                        </View>
+                        </View> */}
                     </WingBlank>
                 </ScrollView>
             </Provider>
