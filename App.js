@@ -46,7 +46,6 @@ export default class App extends Component {
     BackgroundJob.cancelAll();
     LogInfo('后台任务被清除！', '');
     //初始化全局参数
-
   }
   render() {
     return Platform.OS == "ios" ? (

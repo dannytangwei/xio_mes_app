@@ -61,7 +61,7 @@ async function HTTPGET(url, token = _token, version = _version, timeout = _timeo
     }, timeout);
 
 
-
+    console.info('请求服务：' + apiurl)
     let getPromise = new Promise((resolve, reject) => {
         fetch(apiurl, {
             method: 'GET',
@@ -105,7 +105,7 @@ async function HTTPPOST(url, body, token = _token, version = _version, timeout =
 
     let newbody = (typeof (body) == 'string' ? body : JSON.stringify(body));
 
-
+    console.info('请求服务：' + apiurl + ' 参数' + newbody)
     //LogInfo('POST请求服务端数据' + baseurl + url);
     let postPromise = new Promise((resolve, reject) => {
         fetch(apiurl, {
@@ -150,7 +150,7 @@ async function HTTPPOST_Multipart(url, body, token = _token, version = _version,
         dispatchTimeout();
     }, timeout);
 
-
+    console.info('请求服务：' + apiurl)
     let postPromise = new Promise((resolve, reject) => {
 
         fetch(apiurl, {

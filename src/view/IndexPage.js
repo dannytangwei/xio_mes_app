@@ -133,7 +133,7 @@ class IndexPage extends React.Component {
                         pagepath: 'WoBoxClose'
                     }
                 )
-                
+
                 this.state.appBtnes.push(
                     {
                         name: '成品入库扫描',
@@ -143,7 +143,7 @@ class IndexPage extends React.Component {
                 )
             }
             if (user.barRoleText.includes('入库管理') == true) {
-                
+
             }
 
             if (user.barRoleText.includes('发运管理') == true) {
@@ -275,10 +275,7 @@ class IndexPage extends React.Component {
                 //     }
                 // );
             }
-
         }
-
-
     }
 
     gotowebview() {
@@ -318,7 +315,7 @@ class IndexPage extends React.Component {
                         selectedIndex={2}
                         autoplay
                         infinite
-                         
+
                     >
                         <View
                             style={[styles.containerVertical, {}]}
@@ -504,7 +501,7 @@ class IndexPage extends React.Component {
                         selected={this.state.selectedTab === 'my'}
                         onPress={() => this.onChangeTab('my')}
                     >
-                        <MinePage token={this.props.token}  navigation = {this.props.navigation}/>
+                        <MinePage token={this.props.token} navigation={this.props.navigation} />
                     </TabBar.Item>
                 </TabBar>
             </Provider>
@@ -544,7 +541,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 36,
     },
-    noticebar:{
+    noticebar: {
         backgroundColor: '#ffffff',
     },
     showboxarea: {
