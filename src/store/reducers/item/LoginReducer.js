@@ -44,6 +44,14 @@ export default function loginIn(state = initialState, action) {
                 user: null
             }
             break;
+        case TYPES.LOGIN_OUT:
+            return {
+                ...state,
+                status: '0',
+                message: '登出成功',
+                user: null
+            }
+            break;
         default:
             return state;
     }

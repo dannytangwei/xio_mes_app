@@ -60,6 +60,7 @@ class MinePage extends React.Component {
 
     logout(){
         const { navigate } = this.props.navigation;
+        this.props.dispatch(loginAction.loginout());
         navigate('Login');
     }
     

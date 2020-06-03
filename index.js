@@ -6,7 +6,7 @@ import { AppRegistry, Alert } from 'react-native';
 
 import { Provider } from 'react-redux'
 
-import { setJSExceptionHandler } from 'react-native-exception-handler';
+import { setJSExceptionHandler, setNativeExceptionHandler } from 'react-native-exception-handler';
 import { LogInfo, LogException } from './src/api/Logger';
 
 import App from './App';
@@ -37,5 +37,17 @@ const errorHandler = (e, isFatal) => {
 };
 
 setJSExceptionHandler(errorHandler, true);
+setNativeExceptionHandler(exceptionString => {
+    LogException('全局异常', '异常信息：' + exceptionString);
+    console.log('全局异常：' + exceptionString);
+});
+
+global.ErrorUtils.setGlobalHandler(error => {
+    if (error && error != null && JSON.stringify(error) != '"null"') {
+        LogException('全局异常', '异常信息：' + error.name + ' , ' + error.message + JSON.stringify(error));
+        console.log('ErrorUtils发现了异常错误，为了避免了崩溃，具体报错信息：');
+        console.log(error.name, error.message, JSON.stringify(error));
+    }
+}, true);
 
 AppRegistry.registerComponent(appName, () => App);
