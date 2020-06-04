@@ -1,0 +1,60 @@
+[
+    {
+        "model": "仓储物料管理",
+        "applist": [
+            {
+                "name": "采购入库(整单)",
+                "iconname": "import",
+                "pagepath": "PoIn",
+                "bindrole": "采购到货"
+            },
+            {
+                "name": "采购入库(按行)",
+                "iconname": "import",
+                "pagepath": "PoinByLine",
+                "bindrole": "采购到货"
+            },
+            {
+                "name": "仓库配送",
+                "iconname": "export",
+                "pagepath": "PSDList",
+                "bindrole": "采购到货"
+            }
+        ]
+    },
+    {
+        "model": "车间现场管理",
+        "applist": [
+            {
+                "name": "工单完工扫描",
+                "iconname": "carry-out",
+                "pagepath": "WoClose",
+                "bindrole": "装箱管理"
+            },
+            {
+                "name": "装箱扫描",
+                "iconname": "inbox",
+                "pagepath": "WoBoxClose",
+                "bindrole": "装箱管理"
+            },
+            {
+                "name": "成品入库扫描",
+                "iconname": "select",
+                "pagepath": "BoxInStorage",
+                "bindrole": "装箱管理"
+            }
+        ]
+    },
+    {
+        "model": "生产管理",
+        "applist": []
+    },
+    {
+        "model": "质检管理",
+        "applist": []
+    },
+    {
+        "model": "管理和测试功能",
+        "applist": []
+    }
+]
