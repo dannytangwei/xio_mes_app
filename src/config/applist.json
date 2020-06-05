@@ -42,6 +42,12 @@
                 "iconname": "select",
                 "pagepath": "BoxInStorage",
                 "bindrole": "装箱管理"
+            },
+            {
+                "name": "静音房",
+                "iconname": "sound",
+                "pagepath": "QuietRoom",
+                "bindrole": "扶梯噪音检测"
             }
         ]
     },
@@ -51,10 +57,77 @@
     },
     {
         "model": "质检管理",
-        "applist": []
+        "applist": [
+            {
+                "name": "成品拼搭质检",
+                "iconname": "check-circle",
+                "pagepath": "FQCPinDa",
+                "bindrole": "成品质检"
+            },
+            {
+                "name": "成品联动质检",
+                "iconname": "check-circle",
+                "pagepath": "FQCLianDong",
+                "bindrole": "成品质检"
+            },
+            {
+                "name": "拼搭不合格处理",
+                "iconname": "issues-close",
+                "pagepath": "FQCPinDaHandle",
+                "bindrole": "成品质检"
+            },
+            {
+                "name": "联动不合格处理",
+                "iconname": "issues-close",
+                "pagepath": "FQCLianDongHandle",
+                "bindrole": "成品质检"
+            },
+            {
+                "name": "进货质检",
+                "iconname": "check-square",
+                "pagepath": "IQCCheck",
+                "bindrole": "进货质检"
+            }
+        ]
     },
     {
         "model": "管理和测试功能",
-        "applist": []
+        "applist": [
+            {
+                "name": "同步数据查询",
+                "iconname": "sync",
+                "pagepath": "SyncManager"
+            },
+            {
+                "name": "NFC_M1TEST",
+                "iconname": "dash",
+                "pagepath": "NFCMifareTest"
+            },
+            {
+                "name": "NFC_NdefTEST",
+                "iconname": "dash",
+                "pagepath": "NFCMultiNdefRecord"
+            },
+            {
+                "name": "音频操作测试",
+                "iconname": "dash",
+                "pagepath": "AudioTest"
+            },
+            {
+                "name": "消息推送",
+                "iconname": "dash",
+                "pagepath": "JPushMessageTest"
+            },
+            {
+                "name": "AR&VR 测试",
+                "iconname": "dash",
+                "pagepath": "ARVR_TEST"
+            },
+            {
+                "name": "WebViewH5 测试",
+                "iconname": "dash",
+                "pagepath": "WebViewPage"
+            }
+        ]
     }
 ]

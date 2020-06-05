@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import FocusTabs from './home/FocusTabs';
 import LinkSystem from './home/LinkSystem';
 import MinePage from './home/MinePage';
+import AppList from '../config/applist.json';
 
 // import ErrorUtils from "ErrorUtils";
 const AD_IMAGE1 = require('../assets/ad/ad1.png');
@@ -278,6 +279,8 @@ class IndexPage extends React.Component {
         }
     }
 
+
+
     gotowebview() {
         const { navigate } = this.props.navigation;
         navigate('WebShow');
@@ -390,15 +393,9 @@ class IndexPage extends React.Component {
         return (
             <ScrollView  >
                 <WhiteSpace size='xs' />
-                {this.showAppFunc("仓储物料管理", this.state.appBtnMM)}
 
-                {this.showAppFunc("车间现场管理", this.state.appBtnes)}
+                {this.computeAccessApp()}
 
-                {this.showAppFunc("生产管理", this.state.appBtnPP)}
-
-                {this.showAppFunc("质检管理", this.state.appBtnQC)}
-
-                {this.showAppFunc("管理和测试功能", this.state.appBtnTest)}
             </ScrollView>
         );
     }
@@ -418,6 +415,37 @@ class IndexPage extends React.Component {
         );
     }
 
+
+
+
+    /**
+     * 计算用户可以访问的应用程序清单
+     */
+    computeAccessApp() {
+        let { status, user, token } = this.props;
+        return (
+            <View>
+                {
+                    AppList.map((CategoryElement) => {
+                        let accessApp = [];
+                        CategoryElement.applist.forEach(appinfo => {
+                            if (user.loginName == 'admin' || (appinfo.bindrole && user.barRoleText.includes(appinfo.bindrole) == true)) {
+                                accessApp.push(appinfo);
+                            }
+                        });
+                        return this.showAppFunc(CategoryElement.model, accessApp)
+                    })
+                }
+            </View>
+        )
+
+    }
+
+    /**
+     * 显示栏目的应用清单
+     * @param {栏目标题} title 
+     * @param {显示的应用清单} applist 
+     */
     showAppFunc(title, applist) {
         if (applist && applist.length >= 1) {
             return (
